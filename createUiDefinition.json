@@ -63,7 +63,7 @@
                             "label": "VM Username",
                             "toolTip": "Admin username for the virtual machines.",
                             "osPlatform": "Windows",
-                            "visible": "[equals(steps('vmDetails').nodeVMOS, 'windows')]"
+                            "visible": "[equals(steps('nodeVMConfiguration').nodeVMOS, 'windows')]"
                         },
                         {
                             "name": "nodeVMAdminUsernameLin",
@@ -71,7 +71,7 @@
                             "label": "VM Username",
                             "toolTip": "Admin username for the virtual machines.",
                             "osPlatform": "Linux",
-                            "visible": "[equals(steps('vmDetails').nodeVMOS, 'linux')]"
+                            "visible": "[equals(steps('nodeVMConfiguration').nodeVMOS, 'linux')]"
                         },
                         {
                             "name": "nodeVMAdminPasswordWin",
@@ -90,7 +90,7 @@
                                 "hideConfirmation": false
                             },
                             "osPlatform": "Windows",
-                            "visible": "[equals(steps('vmDetails').nodeVMOS, 'windows')]"
+                            "visible": "[equals(steps('nodeVMConfiguration').nodeVMOS, 'windows')]"
                         },
                         {
                             "name": "nodeVMAdminPasswordLin",
@@ -114,7 +114,7 @@
                                 "hidePassword": false
                             },
                             "osPlatform": "Linux",
-                            "visible": "[equals(steps('vmDetails').nodeVMOS, 'linux')]"
+                            "visible": "[equals(steps('nodeVMConfiguration').nodeVMOS, 'linux')]"
                         },
                         {
                             "name": "nodeVMSize",
@@ -399,7 +399,7 @@
             "VMAdminUserName": "[steps('nodeVMConfiguration').nodeVMAdminUsername]",
             "VMAdminPassword": "[steps('nodeVMConfiguration').nodeVMAdminPassword.password]",
             "NodeVMSize": "[steps('nodeVMConfiguration').nodeVMSize]",
-            "NodeVMOS" : "[steps('vmDetails').nodeVMOS]",
+            "NodeVMOS" : "[steps('nodeVMConfiguration').nodeVMOS]",
             "InfaDomainName": "[steps('infaDomainConfiguration').infaDomainName]",
             "InfaDomainUser": "[steps('infaDomainConfiguration').infaDomainUser]",
             "InfaDomainPassword": "[steps('infaDomainConfiguration').infaDomainPassword]",
