@@ -63,7 +63,7 @@
                             "label": "VM Username",
                             "toolTip": "Admin username for the virtual machines.",
                             "osPlatform": "Windows",
-                            "visible": "[equals(steps('vmDetails').os, 'windows')]"
+                            "visible": "[equals(steps('vmDetails').nodeVMOS, 'windows')]"
                         },
                         {
                             "name": "nodeVMAdminUsernameLin",
@@ -71,7 +71,7 @@
                             "label": "VM Username",
                             "toolTip": "Admin username for the virtual machines.",
                             "osPlatform": "Linux",
-                            "visible": "[equals(steps('vmDetails').os, 'linux')]"
+                            "visible": "[equals(steps('vmDetails').nodeVMOS, 'linux')]"
                         },
                         {
                             "name": "nodeVMAdminPasswordWin",
@@ -90,7 +90,7 @@
                                 "hideConfirmation": false
                             },
                             "osPlatform": "Windows",
-                            "visible": "[equals(steps('vmDetails').os, 'windows')]"
+                            "visible": "[equals(steps('vmDetails').nodeVMOS, 'windows')]"
                         },
                         {
                             "name": "nodeVMAdminPasswordLin",
@@ -114,7 +114,7 @@
                                 "hidePassword": false
                             },
                             "osPlatform": "Linux",
-                            "visible": "[equals(steps('vmDetails').os, 'linux')]"
+                            "visible": "[equals(steps('vmDetails').nodeVMOS, 'linux')]"
                         },
                         {
                             "name": "nodeVMSize",
