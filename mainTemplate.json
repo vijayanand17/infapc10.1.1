@@ -230,9 +230,9 @@
             "type": "string",
             "metadata": {
                 "description": "Base URL for Marketplace",
-                "artifactsBaseUrl": "https://raw.githubusercontent.com/vijayanand17/Templates/master"
+                "artifactsBaseUrl": "https://raw.githubusercontent.com/vijayanand17/infapc10.1.1/master"
             },
-            "defaultValue": "https://raw.githubusercontent.com/vijayanand17/Templates/master"
+            "defaultValue": "https://raw.githubusercontent.com/vijayanand17/infapc10.1.1/master"
         }
     },
     "variables": {
