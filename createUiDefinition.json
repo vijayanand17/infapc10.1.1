@@ -213,6 +213,23 @@
                         "options": {
                             "hideConfirmation": true
                         }
+                    },
+                    {
+                        "name": "infaDomainLicense",
+                        "type": "Microsoft.Common.FileUpload",
+                        "label": "Informatica license file",
+                        "toolTip": "",
+                        "constraints": {
+                            "required": false,
+                            "accept": ".key"
+                        },
+                        "options": {
+                            "multiple": false,
+                            "uploadMode": "file",
+                            "openMode": "binary",
+                            "encoding": "UTF-8"
+                        },
+                        "visible": true
                     }
                 ]
             },
