@@ -173,7 +173,7 @@
             }
         },
         "nodeVMAdminSshPublicKey": {
-            "type": "string",
+            "type": "securestring",
             "defaultValue": "",
             "metadata": {
                 "description": "Node VM sshPublicKey"

@@ -43,7 +43,7 @@
             "type": "securestring"
         },
         "nodeVMAdminSshPublicKey": {
-            "type": "string"
+            "type": "securestring"
         },
         "nodeVMNamePrefix": {
             "type": "string",
