@@ -421,6 +421,7 @@
             "infaDomainName": "[steps('infaDomainConfiguration').infaDomainName]",
             "infaDomainUser": "[steps('infaDomainConfiguration').infaDomainUser]",
             "infaDomainPassword": "[steps('infaDomainConfiguration').infaDomainPassword]",
+            "infaDomainLicense": "[steps('infaDomainConfiguration').infaDomainLicense]",
             "infaKeyword": "[steps('infaDomainConfiguration').infaDomainEncryptionKeyword]",
             "dbVMName": "[steps('databaseConfiguration').databaseName]",
             "dbVMSize": "[steps('databaseConfiguration').databaseVMSize]",

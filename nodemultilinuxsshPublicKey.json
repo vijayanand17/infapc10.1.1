@@ -68,7 +68,7 @@
             "type": "string",
             "minLength": 4
         },
-        "infaKeyWord": {
+        "infaKeyword": {
             "type": "securestring",
             "minLength": 4
         },
@@ -224,7 +224,7 @@
                             ]
                         },
                         "protectedSettings": {
-                            "commandToExecute": "[concat('sh ', variables('extScriptFile'), ' ', concat(parameters('nodeVMNamePrefix'), '1'), ' ', parameters('infaDomainName'), ' ', parameters('infaDomainUser'), ' ', parameters('infaDomainPassword'), ' ', parameters('infaNodeNamePrefix'), '1', ' ', variables('infaNodePort'), ' ', variables('dbType'), ' ', variables('dbInstanceName'), ' ', parameters('dbUser'), ' ', parameters('dbPassword'), ' ', parameters('dbVMName'), ' ', variables('dbPort'), ' ', parameters('infaKeyWord'), ' 0 ', parameters('nodeVMAdminUsername'), ' ', parameters('storageName'), ' ', listKeys(parameters('storageID'), '2016-01-01').keys[0].value)]"
+                            "commandToExecute": "[concat('sh ', variables('extScriptFile'), ' ', concat(parameters('nodeVMNamePrefix'), '1'), ' ', parameters('infaDomainName'), ' ', parameters('infaDomainUser'), ' ', parameters('infaDomainPassword'), ' ', parameters('infaNodeNamePrefix'), '1', ' ', variables('infaNodePort'), ' ', variables('dbType'), ' ', variables('dbInstanceName'), ' ', parameters('dbUser'), ' ', parameters('dbPassword'), ' ', parameters('dbVMName'), ' ', variables('dbPort'), ' ', parameters('infaKeyword'), ' 0 ', parameters('nodeVMAdminUsername'), ' ', parameters('storageName'), ' ', listKeys(parameters('storageID'), '2016-01-01').keys[0].value)]"
                         }
                     }
                 }
@@ -369,7 +369,7 @@
                             ]
                         },
                         "protectedSettings": {
-                            "commandToExecute": "[concat('sh ', variables('extScriptFile'), ' ', concat(parameters('nodeVMNamePrefix'), '1'), ' ', parameters('infaDomainName'), ' ', parameters('infaDomainUser'), ' ', parameters('infaDomainPassword'), ' ', parameters('infaNodeNamePrefix'), add(copyIndex(), 2), ' ', variables('infaNodePort'), ' ', variables('dbType'), ' ', variables('dbInstanceName'), ' ', parameters('dbUser'), ' ', parameters('dbPassword'), ' ', parameters('dbVMName'), ' ', variables('dbPort'), ' ', parameters('infaKeyWord'), ' 1 ', parameters('nodeVMAdminUsername'), ' ', parameters('storageName'), ' ', listKeys(parameters('storageID'), '2016-01-01').keys[0].value)]"
+                            "commandToExecute": "[concat('sh ', variables('extScriptFile'), ' ', concat(parameters('nodeVMNamePrefix'), '1'), ' ', parameters('infaDomainName'), ' ', parameters('infaDomainUser'), ' ', parameters('infaDomainPassword'), ' ', parameters('infaNodeNamePrefix'), add(copyIndex(), 2), ' ', variables('infaNodePort'), ' ', variables('dbType'), ' ', variables('dbInstanceName'), ' ', parameters('dbUser'), ' ', parameters('dbPassword'), ' ', parameters('dbVMName'), ' ', variables('dbPort'), ' ', parameters('infaKeyword'), ' 1 ', parameters('nodeVMAdminUsername'), ' ', parameters('storageName'), ' ', listKeys(parameters('storageID'), '2016-01-01').keys[0].value)]"
                         }
                     }
                 }

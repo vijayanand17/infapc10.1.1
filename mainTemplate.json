@@ -218,7 +218,7 @@
                 "description": "Informatica domain password"
             }
         },
-        "infaKeyWord": {
+        "infaKeyword": {
             "type": "securestring",
             "minLength": 4,
             "defaultValue": "",
@@ -457,8 +457,8 @@
                     "infaNodeNamePrefix": {
                         "value": "[variables('infaNodeNamePrefix')]"
                     },
-                    "infaKeyWord": {
-                        "value": "[parameters('infaKeyWord')]"
+                    "infaKeyword": {
+                        "value": "[parameters('infaKeyword')]"
                     },
                     "baseUrl": { 
                         "value": "[variables('baseUri')]"
