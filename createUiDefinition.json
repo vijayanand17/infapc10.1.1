@@ -225,8 +225,8 @@
                         },
                         "options": {
                             "multiple": false,
-                            "uploadMode": "file",
-                            "openMode": "binary",
+                            "uploadMode": "url",
+                            "openMode": "text",
                             "encoding": "UTF-8"
                         },
                         "visible": true
