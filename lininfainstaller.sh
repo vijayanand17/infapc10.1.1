@@ -33,18 +33,19 @@ fi
 
 apt-get update &>/dev/null
 
-dbAddress=$dbHost:$dbPort
-hostName=`hostname`
+dbaddress=$dbHost:$dbPort
+hostname=`hostname`
 
 informaticaopt=/opt/Informatica
 infainstallerloc=$informaticaopt/Archive/server
-utilityHome=$informaticaopt/Archive/Utilities
+utilityhome=$informaticaopt/Archive/Utilities
 
 infainstallionlocown=/home/Informatica
 mkdir -p $infainstallionlocown/10.1.1
 
 infainstallionloc=\\/home\\/Informatica\\/10.1.1
-defaultKeyLocation=$infainstallionloc\\/isp\\/config\\/keys
+defaultkeylocation=$infainstallionloc\\/isp\\/config\\/keys
+licensekeylocation=\\/opt\\/Informatica\\/license.key
 
 JRE_HOME="$infainstallerloc/source/java/jre"
 export JRE_HOME		
@@ -53,12 +54,12 @@ export PATH
 
 chmod -R 777 $JRE_HOME
 
-
-CLOUD_SUPPORT_ENABLE=1
+cloudsupportenable=1
 if [ "$domainLicenseURL" != "nolicense" && $joinDomain -eq 0 ]
 then
-	CLOUD_SUPPORT_ENABLE=0
-	java -jar iadutility.jar downloadHttpUrlFile -url $domainLicenseURL -localpath $informaticaopt
+	cloudsupportenable=0
+	cd $utilityhome
+	java -jar iadutility.jar downloadHttpUrlFile -url $domainLicenseURL -localpath $informaticaopt/license.key
 fi
 
 
@@ -69,7 +70,7 @@ then
 	# This is buffer time for master node to start
 	sleep 600
 else
-	cd $utilityHome
+	cd $utilityhome
     java -jar iadutility.jar createAzureFileShare -storageaccesskey $storageKey -storagename $storageName
 fi
 
@@ -81,17 +82,19 @@ mount -t cifs //$storageName.file.core.windows.net/infaaeshare $mountDir -o vers
 echo //$storageName.file.core.windows.net/infaaeshare $mountDir cifs vers=3.0,username=$storageName,password=$storageKey,dir_mode=0777,file_mode=0777 >> /etc/fstab
 
 
+sed -i s/^LICENSE_KEY_LOC=.*/LICENSE_KEY_LOC=$licensekeylocation/ $infainstallerloc/SilentInput.properties
+
 sed -i s/^USER_INSTALL_DIR=.*/USER_INSTALL_DIR=$infainstallionloc/ $infainstallerloc/SilentInput.properties
 
 sed -i s/^CREATE_DOMAIN=.*/CREATE_DOMAIN=$createDomain/ $infainstallerloc/SilentInput.properties
 
 sed -i s/^JOIN_DOMAIN=.*/JOIN_DOMAIN=$joinDomain/ $infainstallerloc/SilentInput.properties
 
-sed -i s/^CLOUD_SUPPORT_ENABLE=.*/CLOUD_SUPPORT_ENABLE=$CLOUD_SUPPORT_ENABLE/ $infainstallerloc/SilentInput.properties
+sed -i s/^CLOUD_SUPPORT_ENABLE=.*/CLOUD_SUPPORT_ENABLE=$cloudsupportenable/ $infainstallerloc/SilentInput.properties
 
 sed -i s/^ENABLE_USAGE_COLLECTION=.*/ENABLE_USAGE_COLLECTION=1/ $infainstallerloc/SilentInput.properties
 
-sed -i s/^KEY_DEST_LOCATION=.*/KEY_DEST_LOCATION=$defaultKeyLocation/ $infainstallerloc/SilentInput.properties
+sed -i s/^KEY_DEST_LOCATION=.*/KEY_DEST_LOCATION=$defaultkeylocation/ $infainstallerloc/SilentInput.properties
 
 sed -i s/^PASS_PHRASE_PASSWD=.*/PASS_PHRASE_PASSWD=$sitekeyKeyword/ $infainstallerloc/SilentInput.properties
 
@@ -105,7 +108,7 @@ sed -i s/^DB_PASSWD=.*/DB_PASSWD=$dbPassword/ $infainstallerloc/SilentInput.prop
 
 sed -i s/^DB_SERVICENAME=.*/DB_SERVICENAME=$dbName/ $infainstallerloc/SilentInput.properties
 
-sed -i s/^DB_ADDRESS=.*/DB_ADDRESS=$dbAddress/ $infainstallerloc/SilentInput.properties
+sed -i s/^DB_ADDRESS=.*/DB_ADDRESS=$dbaddress/ $infainstallerloc/SilentInput.properties
 
 sed -i s/^DOMAIN_NAME=.*/DOMAIN_NAME=$domainName/ $infainstallerloc/SilentInput.properties
 
@@ -115,7 +118,7 @@ sed -i s/^DOMAIN_PORT=.*/DOMAIN_PORT=$nodePort/ $infainstallerloc/SilentInput.pr
 
 sed -i s/^JOIN_NODE_NAME=.*/JOIN_NODE_NAME=$nodeName/ $infainstallerloc/SilentInput.properties
 
-sed -i s/^JOIN_HOST_NAME=.*/JOIN_HOST_NAME=$hostName/ $infainstallerloc/SilentInput.properties
+sed -i s/^JOIN_HOST_NAME=.*/JOIN_HOST_NAME=$hostname/ $infainstallerloc/SilentInput.properties
 
 sed -i s/^JOIN_DOMAIN_PORT=.*/JOIN_DOMAIN_PORT=$nodePort/ $infainstallerloc/SilentInput.properties
 
