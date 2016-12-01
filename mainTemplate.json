@@ -51,7 +51,7 @@
         "existingVnetRG": {
             "type": "string",
             "defaultValue": "",
-            "metadata": { 
+            "metadata": {
                 "description": "Existing VNET resource group name"
             }
         },
@@ -224,6 +224,13 @@
             "defaultValue": "",
             "metadata": {
                 "description": "Informatica domain encryption key keyphrase"
+            }
+        },
+        "infaDomainLicense": { 
+            "type": "securestring",
+            "defaultValue": "nolicense",
+            "metadata": {
+                "description": "Informatica domain license key file url"
             }
         },
         "baseUrl": {
@@ -459,6 +466,9 @@
                     },
                     "infaKeyword": {
                         "value": "[parameters('infaKeyword')]"
+                    },
+                    "infaDomainLicense": { 
+                        "value": "[parameters('infaDomainLicense')]"
                     },
                     "baseUrl": { 
                         "value": "[variables('baseUri')]"
