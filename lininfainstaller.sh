@@ -31,14 +31,17 @@ then
 	lininfainstaller.sh domainHost domainName domainUser domainPassword nodeName nodePort dbType dbName dbUser dbPassword dbHost dbPort sitekeyKeyword joinDomain  osUserName storageName storageKey domainLicenseURL
 fi
 
-apt-get update &>/dev/null
+#DEBUG remove it later
+echo $domainHost $domainName $domainUser $domainPassword $nodeName $nodePort $dbType $dbName $dbUser $dbPassword $dbHost $dbPort $sitekeyKeyword $joinDomain $osUserName $storageName $storageKey $domainLicenseURL
+
+yum -y update &>/dev/null
 
 dbaddress=$dbHost:$dbPort
 hostname=`hostname`
 
 informaticaopt=/opt/Informatica
 infainstallerloc=$informaticaopt/Archive/server
-utilityhome=$informaticaopt/Archive/Utilities
+utilityhome=$informaticaopt/Archive/utilities
 
 infainstallionlocown=/home/Informatica
 mkdir -p $infainstallionlocown/10.1.1
@@ -55,7 +58,7 @@ export PATH
 chmod -R 777 $JRE_HOME
 
 cloudsupportenable=1
-if [ "$domainLicenseURL" != "nolicense" && $joinDomain -eq 0 ]
+if [ "$domainLicenseURL" != "nolicense" -a $joinDomain -eq 0 ]
 then
 	cloudsupportenable=0
 	cd $utilityhome
@@ -75,7 +78,7 @@ else
 fi
 
 
-apt-get install cifs-utils
+yum -y install cifs-utils
 mountDir=/mnt/infaaeshare
 mkdir $mountDir
 mount -t cifs //$storageName.file.core.windows.net/infaaeshare $mountDir -o vers=3.0,username=$storageName,password=$storageKey,dir_mode=0777,file_mode=0777

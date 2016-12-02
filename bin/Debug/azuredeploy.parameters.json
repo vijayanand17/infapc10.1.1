@@ -40,9 +40,6 @@
         },
         "nodeVMCount": {
             "value": "1"
-        },
-        "dbVMName": {
-            "value": "DVMS"
         }
     }
 }
