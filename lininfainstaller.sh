@@ -1,29 +1,29 @@
 #!/bin/sh
 
 #Script arguments
-domainHost=$1
-domainName=$2
-domainUser=$3
-domainPassword=$4
-nodeName=$5
-nodePort=$6
+domainHost=${1}
+domainName=${2}
+domainUser=${3}
+domainPassword=${4}
+nodeName=${5}
+nodePort=${6}
 
-dbType=$7
-dbName=$8
-dbUser=$9
-dbPassword=$10
-dbHost=$11
-dbPort=$12
+dbType=${7}
+dbName=${8}
+dbUser=${9}
+dbPassword=${10}
+dbHost=${11}
+dbPort=${12}
 
-sitekeyKeyword=$13
+sitekeyKeyword=${13}
 
-joinDomain=$14
-osUserName=$15
+joinDomain=${14}
+osUserName=${15}
 
-storageName=$16
-storageKey=$17
+storageName=${16}
+storageKey=${17}
 
-domainLicenseURL=$18
+domainLicenseURL=${18}
 
 #Usage
 if [ $# -ne 18 ]
