@@ -45,6 +45,7 @@ utilityhome=$informaticaopt/Archive/utilities
 
 infainstallionlocown=/home/Informatica
 mkdir -p $infainstallionlocown/10.1.1
+ln -s -t /home/$osUserName/Informatica $infainstallionlocown
 
 infainstallionloc=\\/home\\/Informatica\\/10.1.1
 defaultkeylocation=$infainstallionloc\\/isp\\/config\\/keys
