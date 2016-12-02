@@ -31,9 +31,6 @@ then
 	lininfainstaller.sh domainHost domainName domainUser domainPassword nodeName nodePort dbType dbName dbUser dbPassword dbHost dbPort sitekeyKeyword joinDomain  osUserName storageName storageKey domainLicenseURL
 fi
 
-#DEBUG remove it later
-echo $domainHost $domainName $domainUser $domainPassword $nodeName $nodePort $dbType $dbName $dbUser $dbPassword $dbHost $dbPort $sitekeyKeyword $joinDomain $osUserName $storageName $storageKey $domainLicenseURL
-
 yum -y update &>/dev/null
 
 dbaddress=$dbHost:$dbPort
@@ -45,7 +42,7 @@ utilityhome=$informaticaopt/Archive/utilities
 
 infainstallionlocown=/home/Informatica
 mkdir -p $infainstallionlocown/10.1.1
-ln -s -t /home/$osUserName/Informatica $infainstallionlocown
+ln -s $infainstallionlocown /home/$osUserName/Informatica
 
 infainstallionloc=\\/home\\/Informatica\\/10.1.1
 defaultkeylocation=$infainstallionloc\\/isp\\/config\\/keys
@@ -80,10 +77,10 @@ fi
 
 
 yum -y install cifs-utils
-mountDir=/mnt/infaaeshare
-mkdir $mountDir
-mount -t cifs //$storageName.file.core.windows.net/infaaeshare $mountDir -o vers=3.0,username=$storageName,password=$storageKey,dir_mode=0777,file_mode=0777
-echo //$storageName.file.core.windows.net/infaaeshare $mountDir cifs vers=3.0,username=$storageName,password=$storageKey,dir_mode=0777,file_mode=0777 >> /etc/fstab
+mountdir=/mnt/infaaeshare
+mkdir $mountdir
+mount -t cifs //$storageName.file.core.windows.net/infaaeshare $mountdir -o vers=3.0,username=$storageName,password=$storageKey,dir_mode=0777,file_mode=0777
+echo //$storageName.file.core.windows.net/infaaeshare $mountdir cifs vers=3.0,username=$storageName,password=$storageKey,dir_mode=0777,file_mode=0777 >> /etc/fstab
 
 
 sed -i s/^LICENSE_KEY_LOC=.*/LICENSE_KEY_LOC=$licensekeylocation/ $infainstallerloc/SilentInput.properties
@@ -140,4 +137,4 @@ echo Y Y | sh silentinstall.sh
 
 chown -R $osUserName $infainstallionlocown
 chown -R $osUserName $informaticaopt 
-chown -R $osUserName $mountDir
+chown -R $osUserName $mountdir
