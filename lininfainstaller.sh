@@ -48,6 +48,10 @@ infainstallionloc=\\/home\\/Informatica\\/10.1.1
 defaultkeylocation=$infainstallionloc\\/isp\\/config\\/keys
 licensekeylocation=\\/opt\\/Informatica\\/license.key
 
+# Firewall configurations
+iptables -A IN_public_allow -p tcp -m tcp --dport 6005:6008 -m conntrack --ctstate NEW -j ACCEPT
+iptables -A IN_public_allow -p tcp -m tcp --dport 6014:6114 -m conntrack --ctstate NEW -j ACCEPT
+
 JRE_HOME="$infainstallerloc/source/java/jre"
 export JRE_HOME		
 PATH="$JRE_HOME/bin":"$PATH"
@@ -74,7 +78,6 @@ else
 	cd $utilityhome
     java -jar iadutility.jar createAzureFileShare -storageaccesskey $storageKey -storagename $storageName
 fi
-
 
 yum -y install cifs-utils
 mountdir=/mnt/infaaeshare
@@ -134,6 +137,7 @@ sed -i s/^DOMAIN_CNFRM_PSSWD=.*/DOMAIN_CNFRM_PSSWD=$domainPassword/ $infainstall
 cd $infainstallerloc
 echo Y Y | sh silentinstall.sh 
 
+rm $informaticaopt/license.key
 
 chown -R $osUserName $infainstallionlocown
 chown -R $osUserName $informaticaopt 
