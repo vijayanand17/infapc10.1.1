@@ -134,10 +134,26 @@ sed -i s/^DOMAIN_PSSWD=.*/DOMAIN_PSSWD=$domainPassword/ $infainstallerloc/Silent
 
 sed -i s/^DOMAIN_CNFRM_PSSWD=.*/DOMAIN_CNFRM_PSSWD=$domainPassword/ $infainstallerloc/SilentInput.properties
 
+# To speed up installation
+mv $infainstallerloc/source $infainstallerloc/source_renamed
+mkdir $infainstallerloc/source
+mv $infainstallerloc/unjar_esd.sh $infainstallerloc/unjar_esd.sh_renamed
+head -1 $infainstallerloc/unjar_esd.sh_renamed > $infainstallerloc/unjar_esd.sh
+chmod 777 $infainstallerloc/unjar_esd.sh
+
 cd $infainstallerloc
 echo Y Y | sh silentinstall.sh 
 
-rm $informaticaopt/license.key
+
+# Revert speed up changes
+rm -f $infainstallerloc/source
+mv $infainstallerloc/source_renamed $infainstallerloc/source
+mv $infainstallerloc/unjar_esd.sh_renamed $infainstallerloc/unjar_esd.sh
+
+if [ -f $informaticaopt/license.key ]
+then
+	rm $informaticaopt/license.key
+fi
 
 chown -R $osUserName $infainstallionlocown
 chown -R $osUserName $informaticaopt 
