@@ -28,7 +28,8 @@ domainLicenseURL=${18}
 #Usage
 if [ $# -ne 18 ]
 then
-	lininfainstaller.sh domainHost domainName domainUser domainPassword nodeName nodePort dbType dbName dbUser dbPassword dbHost dbPort sitekeyKeyword joinDomain  osUserName storageName storageKey domainLicenseURL
+	echo lininfainstaller.sh domainHost domainName domainUser domainPassword nodeName nodePort dbType dbName dbUser dbPassword dbHost dbPort sitekeyKeyword joinDomain  osUserName storageName storageKey domainLicenseURL
+	exit -1
 fi
 
 yum -y update &>/dev/null
@@ -43,26 +44,27 @@ utilityhome=$informaticaopt/Archive/utilities
 infainstallionlocown=/home/Informatica
 mkdir -p $infainstallionlocown/10.1.1
 
-if [ -f $infainstallionlocown ]
+
+if [ -d $infainstallionlocown ]
 then
-	if [ -f  /home/$osUserName ] 
+	if [ -d  /home/$osUserName ] 
 	then
-		ln -s $infainstallionlocown /home/$osUserName/Informatica
+		ln -s $infainstallionlocown /home/$osUserName
 	else
 		echo /home/$osUserName does not exist
 	fi
 else
 	echo $infainstallionlocown does not exist
 fi
-	
+
 
 infainstallionloc=\\/home\\/Informatica\\/10.1.1
 defaultkeylocation=$infainstallionloc\\/isp\\/config\\/keys
 licensekeylocation=\\/opt\\/Informatica\\/license.key
 
 # Firewall configurations
-iptables -A IN_public_allow -p tcp -m tcp --dport 6005:6008 -m conntrack --ctstate NEW -j ACCEPT
-iptables -A IN_public_allow -p tcp -m tcp --dport 6014:6114 -m conntrack --ctstate NEW -j ACCEPT
+sudo iptables -A IN_public_allow -p tcp -m tcp --dport 6005:6008 -m conntrack --ctstate NEW -j ACCEPT
+sudo iptables -A IN_public_allow -p tcp -m tcp --dport 6014:6114 -m conntrack --ctstate NEW -j ACCEPT
 
 JRE_HOME="$infainstallerloc/source/java/jre"
 export JRE_HOME		
@@ -147,10 +149,11 @@ sed -i s/^DOMAIN_PSSWD=.*/DOMAIN_PSSWD=$domainPassword/ $infainstallerloc/Silent
 sed -i s/^DOMAIN_CNFRM_PSSWD=.*/DOMAIN_CNFRM_PSSWD=$domainPassword/ $infainstallerloc/SilentInput.properties
 
 # To speed up installation
-mv $infainstallerloc/source $infainstallerloc/source_renamed
+mv $infainstallerloc/source $infainstallerloc/source_temp
 mkdir $infainstallerloc/source
-mv $infainstallerloc/unjar_esd.sh $infainstallerloc/unjar_esd.sh_renamed
-head -1 $infainstallerloc/unjar_esd.sh_renamed > $infainstallerloc/unjar_esd.sh
+mv $infainstallerloc/unjar_esd.sh $infainstallerloc/unjar_esd.sh_temp
+head -1 $infainstallerloc/unjar_esd.sh_temp > $infainstallerloc/unjar_esd.sh
+echo exit_value_unjar_esd=0 >> $infainstallerloc/unjar_esd.sh
 chmod 777 $infainstallerloc/unjar_esd.sh
 
 cd $infainstallerloc
@@ -158,9 +161,9 @@ echo Y Y | sh silentinstall.sh
 
 
 # Revert speed up changes
-rm -f $infainstallerloc/source
-mv $infainstallerloc/source_renamed $infainstallerloc/source
-mv $infainstallerloc/unjar_esd.sh_renamed $infainstallerloc/unjar_esd.sh
+mv $infainstallerloc/source_temp/* $infainstallerloc/source
+rm $infainstallerloc/unjar_esd.sh
+mv $infainstallerloc/unjar_esd.sh_temp $infainstallerloc/unjar_esd.sh
 
 if [ -f $informaticaopt/license.key ]
 then
@@ -170,3 +173,4 @@ fi
 chown -R $osUserName $infainstallionlocown
 chown -R $osUserName $informaticaopt 
 chown -R $osUserName $mountdir
+chown -R $osUserName $home/*
