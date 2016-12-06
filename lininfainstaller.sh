@@ -25,6 +25,23 @@ storageKey=${17}
 
 domainLicenseURL=${18}
 
+
+echo DEBUGGING
+
+pwd
+
+who am i 
+
+ls -l /home 
+
+ls -l /opt/Informatica/Archive/server
+
+iptables -S
+
+ls -l /opt/Informatica/Archive/server/source/java/jre/bin
+
+/opt/Informatica/Archive/server/source/java/jre/bin/java -version
+
 #Usage
 if [ $# -ne 18 ]
 then
