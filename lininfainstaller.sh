@@ -25,23 +25,6 @@ storageKey=${17}
 
 domainLicenseURL=${18}
 
-
-echo DEBUGGING
-
-pwd
-
-who am i 
-
-ls -l /home 
-
-ls -l /opt/Informatica/Archive/server
-
-iptables -S
-
-ls -l /opt/Informatica/Archive/server/source/java/jre/bin
-
-/opt/Informatica/Archive/server/source/java/jre/bin/java -version
-
 #Usage
 if [ $# -ne 18 ]
 then
@@ -61,19 +44,7 @@ utilityhome=$informaticaopt/Archive/utilities
 infainstallionlocown=/home/Informatica
 mkdir -p $infainstallionlocown/10.1.1
 
-
-if [ -d $infainstallionlocown ]
-then
-	if [ -d  /home/$osUserName ] 
-	then
-		ln -s $infainstallionlocown /home/$osUserName
-	else
-		echo /home/$osUserName does not exist
-	fi
-else
-	echo $infainstallionlocown does not exist
-fi
-
+ln -s $infainstallionlocown /home/$osUserName
 
 infainstallionloc=\\/home\\/Informatica\\/10.1.1
 defaultkeylocation=$infainstallionloc\\/isp\\/config\\/keys
