@@ -42,7 +42,19 @@ utilityhome=$informaticaopt/Archive/utilities
 
 infainstallionlocown=/home/Informatica
 mkdir -p $infainstallionlocown/10.1.1
-ln -s $infainstallionlocown /home/$osUserName/Informatica
+
+if [ -f $infainstallionlocown ]
+then
+	if [ -f  /home/$osUserName ] 
+	then
+		ln -s $infainstallionlocown /home/$osUserName/Informatica
+	else
+		echo /home/$osUserName does not exist
+	fi
+else
+	echo $infainstallionlocown does not exist
+fi
+	
 
 infainstallionloc=\\/home\\/Informatica\\/10.1.1
 defaultkeylocation=$infainstallionloc\\/isp\\/config\\/keys
