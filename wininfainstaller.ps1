@@ -22,37 +22,43 @@ Param(
   [string]$infaEdition,
 
   [string]$storageName,
-  [string]$storageKey
+  [string]$storageKey,
+  [string]$infaLicense
 )
 
 #Adding Windows firewall inbound rule
 netsh  advfirewall firewall add rule name="Informatica_PowerCenter" dir=in action=allow profile=any localport=6005-6113 protocol=TCP
 
-$CLOUD_SUPPORT_ENABLE = "1"
+$shareName = "infaaeshare"
 
-$ShareName = "infaaeshare"
-
-$infaHome = $env:SystemDrive + "\Informatica\10.0.0"
-$installerHome = $env:SystemDrive + "\Informatica\Archive\1000_Server_Installer_winem-64t"
-$utilityHome = $env:SystemDrive + "\Informatica\Archive\scripting"
+$infaHome = $env:SystemDrive + "\Informatica\10.1.1"
+$installerHome = $env:SystemDrive + "\Informatica\Archive\1011_Server_Installer_winem-64t"
+$utilityHome = $env:SystemDrive + "\Informatica\Archive\utilities"
 
 #Setting Java in path
-$env:JAVA_HOME= $installerHome + "\source\java"
-$env:Path=$env:JAVA_HOME+"\bin;" + $env:Path
+$env:JRE_HOME= $installerHome + "\source\java\jre"
+$env:Path=$env:JRE_HOME+"\bin;" + $env:Path
 
 # DB Configurations if required
 $dbAddress = $dbHost + ":" + $dbPort
 
 $userInstallDir = $infaHome
 $defaultKeyLocation = $infaHome + "\isp\config\keys"
-
 $propertyFile = $installerHome + "\SilentInput.properties"
+
+$infaLicenseFile = ""
+$CLOUD_SUPPORT_ENABLE = "1"
+if($infaLicense -ne "nolicense" -and $joinDomain -eq 0) {
+	$CLOUD_SUPPORT_ENABLE = "0"
+	$infaLicenseFile = $env:SystemDrive + "\Informatica\license.key"
+	wget $infaLicense -OutFile $infaLicenseFile
+}
 
 $createDomain = 1
 if($joinDomain -eq 1) {
     $createDomain = 0
     # This is buffer time for master node to start
-    Start-Sleep -s 600
+    Start-Sleep -s 300
 } else {
     cd $utilityHome
     java -jar iadutility.jar createAzureFileShare -storageaccesskey $storageKey -storagename $storageName
@@ -62,12 +68,14 @@ $env:USERNAME = $osUserName
 $env:USERDOMAIN = $env:COMPUTERNAME
 
 #Mounting azure shared file drive
-$cmd = "net use I: \\$storageName.file.core.windows.net\$ShareName /u:$storageName $storageKey" 
-$cmd | Set-Content "$env:SystemDrive\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\ConnectShare.cmd"
+$cmd = "net use I: \\$storageName.file.core.windows.net\$shareName /u:$storageName $storageKey" 
+$cmd | Set-Content "$env:SystemDrive\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\MountShareDrive.cmd"
 
-runas /user:$osUserName net use I: \\$storageName.file.core.windows.net\$ShareName /u:$storageName $storageKey
+runas /user:$osUserName net use I: \\$storageName.file.core.windows.net\$shareName /u:$storageName $storageKey
 
-(gc $propertyFile | %{$_ -replace '^CREATE_DOMAIN=.*$',"CREATE_DOMAIN=$createDomain"  `
+(gc $propertyFile | %{$_ -replace '^LICENSE_KEY_LOC=.*$',"LICENSE_KEY_LOC=$infaLicenseFile"  `
+`
+-replace '^CREATE_DOMAIN=.*$',"CREATE_DOMAIN=$createDomain"  `
 `
 -replace '^JOIN_DOMAIN=.*$',"JOIN_DOMAIN=$joinDomain"  `
 `
@@ -115,8 +123,19 @@ runas /user:$osUserName net use I: \\$storageName.file.core.windows.net\$ShareNa
 
 }) | sc $propertyFile
 
+
+# To speed up installation
+Rename-Item $installerHome/source $installerHome/source_temp
+mkdir $installerHome/source
+
 cd $installerHome
-
 $installCmd = $installerHome + "\silentInstall.bat"
-
 Start-Process $installCmd -Verb runAs -workingdirectory $installerHome -wait | Out-Null
+
+# Revert speed up changes
+rmdir $installerHome/source
+Rename-Item $installerHome/source_temp $installerHome/source
+
+if($infaLicenseFile -ne "") {
+	rm $infaLicenseFile
+}

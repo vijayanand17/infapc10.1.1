@@ -75,7 +75,7 @@ if [ $joinDomain -eq 1 ]
 then
     createDomain=0
 	# This is buffer time for master node to start
-	sleep 600
+	sleep 300
 else
 	cd $utilityhome
     java -jar iadutility.jar createAzureFileShare -storageaccesskey $storageKey -storagename $storageName
