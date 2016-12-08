@@ -275,6 +275,31 @@
                                 "options": { }
                             },
                             {
+                                "name": "dbVMAdminUsername",
+                                "type": "Microsoft.Compute.UserNameTextBox",
+                                "label": "Username",
+                                "toolTip": "Admin username for the machines",
+                                "osPlatform": "Windows",
+                                "constraints": {
+                                    "required": true
+                                }
+                            },
+                            {
+                                "name": "dbVMAdminPassword",
+                                "type": "Microsoft.Compute.CredentialsCombo",
+                                "label": {
+                                    "password": "Password",
+                                    "confirmPassword": "Confirm password"
+                                },
+                                "toolTip": {
+                                    "password": "Admin password for the machines"
+                                },
+                                "osPlatform": "Windows",
+                                "constraints": {
+                                    "required": true
+                                }
+                            },
+                            {
                                 "name": "databaseVMSize",
                                 "type": "Microsoft.Compute.SizeSelector",
                                 "label": "Database  machine size",
@@ -303,38 +328,13 @@
                                 },
                                 "osPlatform": "Windows",
                                 "count": 1
-                            },
-                            {
-                                "name": "dbVMAdminUsername",
-                                "type": "Microsoft.Compute.UserNameTextBox",
-                                "label": "Username",
-                                "toolTip": "Admin username for the machines",
-                                "osPlatform": "Windows",
-                                "constraints": {
-                                    "required": true
-                                }
-                            },
-                            {
-                                "name": "dbVMAdminPassword",
-                                "type": "Microsoft.Compute.CredentialsCombo",
-                                "label": {
-                                    "password": "Password",
-                                    "confirmPassword": "Confirm password"
-                                },
-                                "toolTip": {
-                                    "password": "Admin password for the machines"
-                                },
-                                "osPlatform": "Windows",
-                                "constraints": {
-                                    "required": true
-                                }
                             }
                         ]
                     },
                     {
                         "name": "databaseuser",
                         "type": "Microsoft.Common.Section",
-                        "label": "Domain database user",
+                        "label": "Database user",
                         "elements": [
                             {
                                 "name": "infaDomainDBUser",
