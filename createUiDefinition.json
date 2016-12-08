@@ -6,6 +6,92 @@
         ],
         "steps": [
             {
+                "label": "Informatica Domain Settings",
+                "name": "infaDomainConfiguration",
+                "subLabel": {
+                    "preValidation": "Configure domain settings",
+                    "postValidation": "Done"
+                },
+                "bladeTitle": "Informatica Domain Settings",
+                "elements": [
+                    {
+                        "name": "infaDomainName",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Informatica domain name",
+                        "defaultValue": "Azure_Domain",
+                        "toolTip": "Specify a name for the Domain",
+                        "constraints": {
+                            "required": true,
+                            "regex": "^[a-z0-9A-Z_]{3,30}$",
+                            "validationMessage": "Only alphanumeric characters and underscore are allowed. The value must be 3-30"
+                        }
+                    },
+                    {
+                        "name": "infaDomainUser",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Informatica domain administrator name",
+                        "defaultValue": "Administrator",
+                        "toolTip": "Domain administrator user name",
+                        "constraints": {
+                            "required": true,
+                            "regex": "^[a-z0-9A-Z_]{3,30}$",
+                            "validationMessage": "Only alphanumeric characters and underscore are allowed. The value must be 3-30"
+                        }
+                    },
+                    {
+                        "name": "infaDomainPassword",
+                        "type": "Microsoft.Common.PasswordBox",
+                        "label": {
+                            "password": "Informatica domain password",
+                            "confirmPassword": "Confirm Informatica domain password"
+                        },
+                        "constraints": {
+                            "required": true,
+                            "regex": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\s\\w]).{8,123}$",
+                            "validationMessage": "Password must be at least 8 characters in length. Should contain at least one special character, number, upper-case and lower-case character"
+                        },
+                        "options": {
+                            "hideConfirmation": false
+                        }
+
+                    },
+                    {
+                        "name": "infaDomainEncryptionKeyword",
+                        "type": "Microsoft.Common.PasswordBox",
+                        "toolTip": "Keyphrase for generating encryption key for domain",
+                        "label": {
+                            "password": "Keyphrase for encryption key",
+                            "confirmPassword": "Confirm keyphrase for encryption key"
+                        },
+                        "constraints": {
+                            "required": true,
+                            "regex": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\s\\w]).{8,123}$",
+                            "validationMessage": "Keyphrase must be at least 8 characters in length. Should contain at least one special character, number, upper-case and lower-case character"
+                        },
+                        "options": {
+                            "hideConfirmation": true
+                        }
+                    },
+                    {
+                        "name": "infaDomainLicense",
+                        "type": "Microsoft.Common.FileUpload",
+                        "label": "Informatica license file",
+                        "toolTip": "",
+                        "constraints": {
+                            "required": false,
+                            "accept": ".key"
+                        },
+                        "options": {
+                            "multiple": false,
+                            "uploadMode": "url",
+                            "openMode": "text",
+                            "encoding": "UTF-8"
+                        },
+                        "visible": true
+                    }
+                ]
+            },
+            {
                 "name": "nodeVMConfiguration",
                 "label": "Node Settings",
                 "subLabel": {
@@ -144,92 +230,6 @@
                         },
                         "osPlatform": "Windows",
                         "count": "[steps('nodeVMConfiguration').domainNodeCount]"
-                    }
-                ]
-            },
-            {
-                "label": "Informatica Domain Settings",
-                "name": "infaDomainConfiguration",
-                "subLabel": {
-                    "preValidation": "Configure domain settings",
-                    "postValidation": "Done"
-                },
-                "bladeTitle": "Informatica Domain Settings",
-                "elements": [
-                    {
-                        "name": "infaDomainName",
-                        "type": "Microsoft.Common.TextBox",
-                        "label": "Informatica domain name",
-                        "defaultValue": "Azure_Domain",
-                        "toolTip": "Specify a name for the Domain",
-                        "constraints": {
-                            "required": true,
-                            "regex": "^[a-z0-9A-Z_]{3,30}$",
-                            "validationMessage": "Only alphanumeric characters and underscore are allowed. The value must be 3-30"
-                        }
-                    },
-                    {
-                        "name": "infaDomainUser",
-                        "type": "Microsoft.Common.TextBox",
-                        "label": "Informatica domain administrator name",
-                        "defaultValue": "Administrator",
-                        "toolTip": "Domain administrator user name",
-                        "constraints": {
-                            "required": true,
-                            "regex": "^[a-z0-9A-Z_]{3,30}$",
-                            "validationMessage": "Only alphanumeric characters and underscore are allowed. The value must be 3-30"
-                        }
-                    },
-                    {
-                        "name": "infaDomainPassword",
-                        "type": "Microsoft.Common.PasswordBox",
-                        "label": {
-                            "password": "Informatica domain password",
-                            "confirmPassword": "Confirm Informatica domain password"
-                        },
-                        "constraints": {
-                            "required": true,
-                            "regex": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\s\\w]).{8,123}$",
-                            "validationMessage": "Password must be at least 8 characters in length. Should contain at least one special character, number, upper-case and lower-case character"
-                        },
-                        "options": {
-                            "hideConfirmation": false
-                        }
-
-                    },
-                    {
-                        "name": "infaDomainEncryptionKeyword",
-                        "type": "Microsoft.Common.PasswordBox",
-                        "toolTip": "Keyphrase for generating encryption key for domain",
-                        "label": {
-                            "password": "Keyphrase for encryption key",
-                            "confirmPassword": "Confirm keyphrase for encryption key"
-                        },
-                        "constraints": {
-                            "required": true,
-                            "regex": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\s\\w]).{8,123}$",
-                            "validationMessage": "Keyphrase must be at least 8 characters in length. Should contain at least one special character, number, upper-case and lower-case character"
-                        },
-                        "options": {
-                            "hideConfirmation": true
-                        }
-                    },
-                    {
-                        "name": "infaDomainLicense",
-                        "type": "Microsoft.Common.FileUpload",
-                        "label": "Informatica license file",
-                        "toolTip": "",
-                        "constraints": {
-                            "required": false,
-                            "accept": ".key"
-                        },
-                        "options": {
-                            "multiple": false,
-                            "uploadMode": "url",
-                            "openMode": "text",
-                            "encoding": "UTF-8"
-                        },
-                        "visible": true
                     }
                 ]
             },
