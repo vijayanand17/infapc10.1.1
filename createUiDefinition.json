@@ -365,93 +365,95 @@
                                 }
                             }
                         ]
+                    }
+                ]
+            },
+            {
+                "name": "infraConfiguration",
+                "label": "Infrastructure Settings",
+                "subLabel": {
+                    "preValidation": "Configure Storage and VNET settings",
+                    "postValidation": "Done"
+                },
+                "bladeTitle": "Infrastructure Settings",
+                "elements": [
+                    {
+                        "name": "storageAccount",
+                        "type": "Microsoft.Storage.StorageAccountSelector",
+                        "label": "Storage account",
+                        "toolTip": "Storage account used for the machines",
+                        "defaultValue": {
+                            "type": "Standard_LRS"
+                        }
                     },
                     {
-                        "name": "infraConfiguration",
-                        "label": "Infrastructure Settings",
-                        "subLabel": {
-                            "preValidation": "Configure Storage and VNET settings",
-                            "postValidation": "Done"
+                        "name": "infavnet",
+                        "type": "Microsoft.Network.VirtualNetworkCombo",
+                        "label": {
+                            "virtualNetwork": "Virtual network",
+                            "subnets": "Subnets"
                         },
-                        "bladeTitle": "Infrastructure Settings",
-                        "elements": [
-                            {
-                                "name": "storageAccount",
-                                "type": "Microsoft.Storage.StorageAccountSelector",
-                                "label": "Storage account",
-                                "toolTip": "Storage account used for the machines",
+                        "toolTip": {
+                            "virtualNetwork": "Virtual network all resource required to be part of",
+                            "subnets": ""
+                        },
+                        "defaultValue": {
+                            "name": "InfaVNET",
+                            "addressPrefixSize": "/16"
+                        },
+                        "constraints": {
+                            "minAddressPrefixSize": "/30"
+                        },
+                        "subnets": {
+                            "subnet1": {
+                                "label": "Subnet",
                                 "defaultValue": {
-                                    "type": "Standard_LRS"
-                                }
-                            },
-                            {
-                                "name": "infavnet",
-                                "type": "Microsoft.Network.VirtualNetworkCombo",
-                                "label": {
-                                    "virtualNetwork": "Virtual network",
-                                    "subnets": "Subnets"
-                                },
-                                "toolTip": {
-                                    "virtualNetwork": "Virtual network all resource required to be part of",
-                                    "subnets": ""
-                                },
-                                "defaultValue": {
-                                    "name": "InfaVNET",
-                                    "addressPrefixSize": "/16"
+                                    "name": "InfaSubnet",
+                                    "addressPrefixSize": "/24"
                                 },
                                 "constraints": {
-                                    "minAddressPrefixSize": "/30"
-                                },
-                                "subnets": {
-                                    "subnet1": {
-                                        "label": "Subnet",
-                                        "defaultValue": {
-                                            "name": "InfaSubnet",
-                                            "addressPrefixSize": "/24"
-                                        },
-                                        "constraints": {
-                                            "minAddressPrefixSize": "/30",
-                                            "minAddressCount": "[add(steps('nodeVMConfiguration').domainNodeCount, 1)]",
-                                            "requireContiguousAddresses": true
-                                        }
-                                    }
+                                    "minAddressPrefixSize": "/30",
+                                    "minAddressCount": "[add(steps('nodeVMConfiguration').domainNodeCount, 1)]",
+                                    "requireContiguousAddresses": true
                                 }
                             }
-                        ]
+                        }
                     }
-                ],
-
-                "outputs": {
-                    "location": "[location()]",
-                    "nodeVMCount": "[steps('nodeVMConfiguration').domainNodeCount]",
-                    "nodeVMNamePrefix": "[steps('nodeVMConfiguration').nodeVMPrefix]",
-                    "nodeVMAuthType": "[coalesce(steps('nodeVMConfiguration').nodeVMAdminPasswordWin.authenticationType, steps('nodeVMConfiguration').nodeVMAdminPasswordLin.authenticationType)]",
-                    "nodeVMAdminUsername": "[coalesce(steps('nodeVMConfiguration').nodeVMAdminUsernameWin, steps('nodeVMConfiguration').nodeVMAdminUsernameLin)]",
-                    "nodeVMAdminPassword": "[coalesce(steps('nodeVMConfiguration').nodeVMAdminPasswordWin, steps('nodeVMConfiguration').nodeVMAdminPasswordLin)]",
-                    "nodeVMSize": "[steps('nodeVMConfiguration').nodeVMSize]",
-                    "nodeVMOS": "[steps('nodeVMConfiguration').nodeVMOS]",
-                    "infaDomainName": "[steps('infaDomainConfiguration').infaDomainName]",
-                    "infaDomainUser": "[steps('infaDomainConfiguration').infaDomainUser]",
-                    "infaDomainPassword": "[steps('infaDomainConfiguration').infaDomainPassword]",
-                    "infaDomainLicense": "[steps('infaDomainConfiguration').infaDomainLicense]",
-                    "infaKeyword": "[steps('infaDomainConfiguration').infaDomainEncryptionKeyword]",
-                    "dbVMName": "[steps('databaseConfiguration').databaseconfig.databaseName]",
-                    "dbVMSize": "[steps('databaseConfiguration').databaseconfig.databaseVMSize]",
-                    "dbType": "[steps('databaseConfiguration').databaseconfig.databaseType]",
-                    "dbVMAdminUsername": "[steps('databaseConfiguration').databaseconfig.dbVMAdminUsername]",
-                    "dbVMAdminPassword": "[steps('databaseConfiguration').databaseconfig.dbVMAdminPassword.password]",
-                    "dbUser": "[steps('databaseConfiguration').databaseuser.infaDomainDBUser]",
-                    "dbPassword": "[steps('databaseConfiguration').databaseuser.infaDomainDBPassword]",
-                    "storageName": "[steps('infraConfiguration').storageAccount.name]",
-                    "storageType": "[steps('infraConfiguration').storageAccount.type]",
-                    "storageExistingOrNew": "[steps('infraConfiguration').storageAccount.newOrExisting]",
-                    "existingStorageRG": "[steps('infraConfiguration').storageAccount.resourceGroup]",
-                    "vnetName": "[steps('infraConfiguration').infavnet.name]",
-                    "vnetAddressPrefix": "[steps('infraConfiguration').infavnet.addressPrefix]",
-                    "vnetExistingOrNew": "[steps('infraConfiguration').infavnet.newOrExisting]",
-                    "existingVnetRG": "[steps('infraConfiguration').infavnet.resourceGroup]",
-                    "subnetName": "[steps('infraConfiguration').infavnet.subnets.subnet1.name]",
-                    "subnetPrefix": "[steps('infraConfiguration').infavnet.subnets.subnet1.addressPrefix]"
-                }
+                ]
             }
+        ],
+
+        "outputs": {
+            "location": "[location()]",
+            "nodeVMCount": "[steps('nodeVMConfiguration').domainNodeCount]",
+            "nodeVMNamePrefix": "[steps('nodeVMConfiguration').nodeVMPrefix]",
+            "nodeVMAuthType": "[coalesce(steps('nodeVMConfiguration').nodeVMAdminPasswordWin.authenticationType, steps('nodeVMConfiguration').nodeVMAdminPasswordLin.authenticationType)]",
+            "nodeVMAdminUsername": "[coalesce(steps('nodeVMConfiguration').nodeVMAdminUsernameWin, steps('nodeVMConfiguration').nodeVMAdminUsernameLin)]",
+            "nodeVMAdminPassword": "[coalesce(steps('nodeVMConfiguration').nodeVMAdminPasswordWin, steps('nodeVMConfiguration').nodeVMAdminPasswordLin)]",
+            "nodeVMSize": "[steps('nodeVMConfiguration').nodeVMSize]",
+            "nodeVMOS": "[steps('nodeVMConfiguration').nodeVMOS]",
+            "infaDomainName": "[steps('infaDomainConfiguration').infaDomainName]",
+            "infaDomainUser": "[steps('infaDomainConfiguration').infaDomainUser]",
+            "infaDomainPassword": "[steps('infaDomainConfiguration').infaDomainPassword]",
+            "infaDomainLicense": "[steps('infaDomainConfiguration').infaDomainLicense]",
+            "infaKeyword": "[steps('infaDomainConfiguration').infaDomainEncryptionKeyword]",
+            "dbVMName": "[steps('databaseConfiguration').databaseconfig.databaseName]",
+            "dbVMSize": "[steps('databaseConfiguration').databaseconfig.databaseVMSize]",
+            "dbType": "[steps('databaseConfiguration').databaseconfig.databaseType]",
+            "dbVMAdminUsername": "[steps('databaseConfiguration').databaseconfig.dbVMAdminUsername]",
+            "dbVMAdminPassword": "[steps('databaseConfiguration').databaseconfig.dbVMAdminPassword.password]",
+            "dbUser": "[steps('databaseConfiguration').databaseuser.infaDomainDBUser]",
+            "dbPassword": "[steps('databaseConfiguration').databaseuser.infaDomainDBPassword]",
+            "storageName": "[steps('infraConfiguration').storageAccount.name]",
+            "storageType": "[steps('infraConfiguration').storageAccount.type]",
+            "storageExistingOrNew": "[steps('infraConfiguration').storageAccount.newOrExisting]",
+            "existingStorageRG": "[steps('infraConfiguration').storageAccount.resourceGroup]",
+            "vnetName": "[steps('infraConfiguration').infavnet.name]",
+            "vnetAddressPrefix": "[steps('infraConfiguration').infavnet.addressPrefix]",
+            "vnetExistingOrNew": "[steps('infraConfiguration').infavnet.newOrExisting]",
+            "existingVnetRG": "[steps('infraConfiguration').infavnet.resourceGroup]",
+            "subnetName": "[steps('infraConfiguration').infavnet.subnets.subnet1.name]",
+            "subnetPrefix": "[steps('infraConfiguration').infavnet.subnets.subnet1.addressPrefix]"
+        }
     }
+}
