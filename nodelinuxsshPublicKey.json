@@ -209,7 +209,7 @@
                     "name": "ScriptExtGVM",
                     "type": "extensions",
                     "location": "[parameters('location')]",
-                    "apiVersion": "2015-06-15",
+                    "apiVersion": "2016-03-30",
                     "dependsOn": [
                         "[concat('Microsoft.Compute/virtualMachines/', parameters('nodeVMNamePrefix'), add(variables('index'), 1))]"
                     ],
@@ -219,7 +219,7 @@
                     "properties": {
                         "publisher": "Microsoft.OSTCExtensions",
                         "type": "CustomScriptForLinux",
-                        "typeHandlerVersion": "1.4",
+                        "typeHandlerVersion": "1.5",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
                             "fileUris": [

@@ -25,6 +25,8 @@ storageKey=${17}
 
 domainLicenseURL=${18}
 
+echo Starting Informatica setup...
+
 #Usage
 if [ $# -ne 18 ]
 then
@@ -168,3 +170,5 @@ chown -R $osUserName $infainstallionlocown
 chown -R $osUserName $informaticaopt 
 chown -R $osUserName $mountdir
 chown -R $osUserName /home/$osUserName
+
+echo Informatica setup Complete.
