@@ -32,6 +32,7 @@ then
 	exit -1
 fi
 
+echo Updating system libraries
 yum -y update &>/dev/null
 
 dbaddress=$dbHost:$dbPort
@@ -41,9 +42,11 @@ informaticaopt=/opt/Informatica
 infainstallerloc=$informaticaopt/Archive/server
 utilityhome=$informaticaopt/Archive/utilities
 
-infainstallionlocown=/home/Informatica
-mkdir -p $infainstallionlocown/10.1.1
 
+infainstallionlocown=/home/Informatica
+#mkdir -p $infainstallionlocown/10.1.1
+
+echo Creating symbolic link to Informatica installation
 ln -s $infainstallionlocown /home/$osUserName
 
 infainstallionloc=\\/home\\/Informatica\\/10.1.1
@@ -51,6 +54,7 @@ defaultkeylocation=$infainstallionloc\\/isp\\/config\\/keys
 licensekeylocation=\\/opt\\/Informatica\\/license.key
 
 # Firewall configurations
+echo Adding firewall rules for Informatica domain service ports
 iptables -A IN_public_allow -p tcp -m tcp --dport 6005:6008 -m conntrack --ctstate NEW -j ACCEPT
 iptables -A IN_public_allow -p tcp -m tcp --dport 6014:6114 -m conntrack --ctstate NEW -j ACCEPT
 
@@ -66,6 +70,7 @@ if [ "$domainLicenseURL" != "nolicense" -a $joinDomain -eq 0 ]
 then
 	cloudsupportenable=0
 	cd $utilityhome
+	echo Getting Informatica license if provided
 	java -jar iadutility.jar downloadHttpUrlFile -url $domainLicenseURL -localpath $informaticaopt/license.key
 fi
 
@@ -77,17 +82,19 @@ then
 	# This is buffer time for master node to start
 	sleep 300
 else
+	echo Creating shared directory on Azure storage
 	cd $utilityhome
     java -jar iadutility.jar createAzureFileShare -storageaccesskey $storageKey -storagename $storageName
 fi
 
+echo Mounting the shared directory
 yum -y install cifs-utils
 mountdir=/mnt/infaaeshare
 mkdir $mountdir
 mount -t cifs //$storageName.file.core.windows.net/infaaeshare $mountdir -o vers=3.0,username=$storageName,password=$storageKey,dir_mode=0777,file_mode=0777
 echo //$storageName.file.core.windows.net/infaaeshare $mountdir cifs vers=3.0,username=$storageName,password=$storageKey,dir_mode=0777,file_mode=0777 >> /etc/fstab
 
-
+echo Editing Informatica silent installation file
 sed -i s/^LICENSE_KEY_LOC=.*/LICENSE_KEY_LOC=$licensekeylocation/ $infainstallerloc/SilentInput.properties
 
 sed -i s/^USER_INSTALL_DIR=.*/USER_INSTALL_DIR=$infainstallionloc/ $infainstallerloc/SilentInput.properties
@@ -144,6 +151,7 @@ head -1 $infainstallerloc/unjar_esd.sh_temp > $infainstallerloc/unjar_esd.sh
 echo exit_value_unjar_esd=0 >> $infainstallerloc/unjar_esd.sh
 chmod 777 $infainstallerloc/unjar_esd.sh
 
+echo Installing Informatica domain
 cd $infainstallerloc
 echo Y Y | sh silentinstall.sh 
 
@@ -158,6 +166,7 @@ then
 	rm $informaticaopt/license.key
 fi
 
+echo Changing ownership of directories
 chown -R $osUserName $infainstallionlocown
 chown -R $osUserName $informaticaopt 
 chown -R $osUserName $mountdir
