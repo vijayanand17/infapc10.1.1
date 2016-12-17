@@ -32,9 +32,6 @@ then
 	exit -1
 fi
 
-echo Updating system libraries
-yum -y update &>/dev/null
-
 dbaddress=$dbHost:$dbPort
 hostname=`hostname`
 
