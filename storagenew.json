@@ -25,8 +25,11 @@
             "location": "[parameters('location')]",
             "apiVersion": "2016-01-01",
             "dependsOn": [ ],
+            "sku": {
+                "name": "[parameters('storageType')]"
+            },
+            "kind": "Storage",
             "properties": {
-                "DonkeyKong": "[parameters('storageType')]"
             }
         }
     ],
