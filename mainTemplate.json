@@ -278,7 +278,7 @@
         {
             "name": "storageSetup",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
+            "apiVersion": "2016-09-01",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -304,7 +304,7 @@
         {
             "name": "vnetSetup",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
+            "apiVersion": "2016-09-01",
             "dependsOn": [
                 "Microsoft.Resources/deployments/storageSetup"
             ],
@@ -339,7 +339,7 @@
         {
             "name": "databaseSetup",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
+            "apiVersion": "2016-09-01",
             "dependsOn": [
                 "Microsoft.Resources/deployments/storageSetup",
                 "Microsoft.Resources/deployments/vnetSetup"
@@ -393,7 +393,7 @@
         {
             "name": "nodesSetup",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
+            "apiVersion": "2016-09-01",
             "dependsOn": [
                 "Microsoft.Resources/deployments/databaseSetup"
             ],

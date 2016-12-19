@@ -58,7 +58,7 @@
             "name": "[variables('publicDNSName')]",
             "type": "Microsoft.Network/publicIPAddresses",
             "location": "[parameters('location')]",
-            "apiVersion": "2015-06-15",
+            "apiVersion": "2016-10-01",
             "dependsOn": [ ],
             "tags": {
                 "displayName": "PubIP01"
@@ -74,7 +74,7 @@
             "name": "[variables('dbVMNicName')]",
             "type": "Microsoft.Network/networkInterfaces",
             "location": "[parameters('location')]",
-            "apiVersion": "2015-06-15",
+            "apiVersion": "2016-10-01",
             "dependsOn": [
                 "[concat('Microsoft.Network/publicIPAddresses/', variables('publicDNSName'))]"
             ],
@@ -102,7 +102,7 @@
             "name": "[parameters('dbVMName')]",
             "type": "Microsoft.Compute/virtualMachines",
             "location": "[parameters('location')]",
-            "apiVersion": "2015-06-15",
+            "apiVersion": "2016-03-30",
             "dependsOn": [
                 "[concat('Microsoft.Network/networkInterfaces/', variables('dbVMNicName'))]"
             ],
@@ -152,7 +152,7 @@
                     "name": "ScriptExtDB",
                     "type": "extensions",
                     "location": "[parameters('location')]",
-                    "apiVersion": "2015-06-15",
+                    "apiVersion": "2016-03-30",
                     "dependsOn": [
                         "[concat('Microsoft.Compute/virtualMachines/', parameters('dbVMName'))]"
                     ],
@@ -179,11 +179,11 @@
     ],
     "outputs": {
         "fqdn": {
-            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('publicDNSName')), '2015-06-15').dnsSettings.fqdn]",
+            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('publicDNSName')), '2016-10-01').dnsSettings.fqdn]",
             "type": "string"
         },
         "ipaddress": {
-            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('publicDNSName')), '2015-06-15').ipAddress]",
+            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('publicDNSName')), '2016-10-01').ipAddress]",
             "type": "string"
         }
     }

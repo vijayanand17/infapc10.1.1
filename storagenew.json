@@ -23,7 +23,7 @@
             "name": "[parameters('storageName')]",
             "type": "Microsoft.Storage/storageAccounts",
             "location": "[parameters('location')]",
-            "apiVersion": "2015-06-15",
+            "apiVersion": "2016-01-01",
             "dependsOn": [ ],
             "properties": {
                 "accountType": "[parameters('storageType')]"

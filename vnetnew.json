@@ -26,7 +26,7 @@
     },
     "resources": [
         {
-            "apiVersion": "2015-06-15",
+            "apiVersion": "2016-10-01",
             "type": "Microsoft.Network/networkSecurityGroups",
             "name": "[variables('NetworkSecurityGroupName')]",
             "location": "[parameters('location')]",
@@ -56,7 +56,7 @@
             "name": "[parameters('vnetName')]",
             "type": "Microsoft.Network/virtualNetworks",
             "location": "[parameters('location')]",
-            "apiVersion": "2015-06-15",
+            "apiVersion": "2016-10-01",
             "dependsOn": [
                 "[concat('Microsoft.Network/networkSecurityGroups/', variables('NetworkSecurityGroupName'))]"
             ],

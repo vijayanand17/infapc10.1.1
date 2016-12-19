@@ -104,7 +104,7 @@
             "name": "[concat(variables('nodeVMDNSName'), '1')]",
             "type": "Microsoft.Network/publicIPAddresses",
             "location": "[parameters('location')]",
-            "apiVersion": "2015-06-15",
+            "apiVersion": "2016-10-01",
             "dependsOn": [ ],
 
             "tags": {
@@ -121,7 +121,7 @@
             "name": "[concat(variables('nodeVMNicPrefix'), '1')]",
             "type": "Microsoft.Network/networkInterfaces",
             "location": "[parameters('location')]",
-            "apiVersion": "2015-06-15",
+            "apiVersion": "2016-10-01",
             "dependsOn": [
                 "[concat('Microsoft.Network/publicIPAddresses/', variables('nodeVMDNSName'), '1')]"
             ],
@@ -149,7 +149,7 @@
             "name": "[concat(parameters('nodeVMNamePrefix'), '1')]",
             "type": "Microsoft.Compute/virtualMachines",
             "location": "[parameters('location')]",
-            "apiVersion": "2015-06-15",
+            "apiVersion": "2016-03-30",
             "dependsOn": [
                 "[concat('Microsoft.Network/networkInterfaces/', variables('nodeVMNicPrefix'), '1')]"
             ],
@@ -237,7 +237,7 @@
             "name": "[concat(variables('nodeVMDNSName'), add(copyIndex(), 2))]",
             "type": "Microsoft.Network/publicIPAddresses",
             "location": "[parameters('location')]",
-            "apiVersion": "2015-06-15",
+            "apiVersion": "2016-10-01",
             "dependsOn": [ ],
             "copy": {
                 "name": "gatewayCount",
@@ -257,7 +257,7 @@
             "name": "[concat(variables('nodeVMNicPrefix'), add(copyIndex(), 2))]",
             "type": "Microsoft.Network/networkInterfaces",
             "location": "[parameters('location')]",
-            "apiVersion": "2015-06-15",
+            "apiVersion": "2016-10-01",
             "dependsOn": [
                 "[concat('Microsoft.Network/publicIPAddresses/', variables('nodeVMDNSName'), add(copyIndex(), 2))]"
             ],
@@ -289,7 +289,7 @@
             "name": "[concat(parameters('nodeVMNamePrefix'), add(copyIndex(), 2))]",
             "type": "Microsoft.Compute/virtualMachines",
             "location": "[parameters('location')]",
-            "apiVersion": "2015-06-15",
+            "apiVersion": "2016-03-30",
             "dependsOn": [
                 "[concat('Microsoft.Network/networkInterfaces/', variables('nodeVMNicPrefix'), add(copyIndex(), 2))]",
                 "[concat('Microsoft.Compute/virtualMachines/', parameters('nodeVMNamePrefix'), '1')]"
@@ -381,19 +381,19 @@
     ],
     "outputs": {
         "fqdn1": {
-            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',concat(variables('nodeVMDNSName'), '1')), '2015-06-15').dnsSettings.fqdn]",
+            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',concat(variables('nodeVMDNSName'), '1')), '2016-10-01').dnsSettings.fqdn]",
             "type": "string"
         },
         "ipaddress1": {
-            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',concat(variables('nodeVMDNSName'), '1')), '2015-06-15').ipAddress]",
+            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',concat(variables('nodeVMDNSName'), '1')), '2016-10-01').ipAddress]",
             "type": "string"
         },
         "fqdn2": {
-            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',concat(variables('nodeVMDNSName'), '2')), '2015-06-15').dnsSettings.fqdn]",
+            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',concat(variables('nodeVMDNSName'), '2')), '2016-10-01').dnsSettings.fqdn]",
             "type": "string"
         },
         "ipaddress2": {
-            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',concat(variables('nodeVMDNSName'), '2')), '2015-06-15').ipAddress]",
+            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',concat(variables('nodeVMDNSName'), '2')), '2016-10-01').ipAddress]",
             "type": "string"
         }
     }
