@@ -181,10 +181,6 @@
         "fqdn": {
             "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('publicDNSName')), '2016-10-01').dnsSettings.fqdn]",
             "type": "string"
-        },
-        "ipaddress": {
-            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('publicDNSName')), '2016-10-01').ipAddress]",
-            "type": "string"
         }
     }
 }
