@@ -96,7 +96,7 @@
         "dbPort": "1433",
 
         "imagePublisher": "informatica",
-        "imageOffer": "platform_10_1_1_multi_node_domain_rhel_byol",
+        "imageOffer": "platform_10_1_1_multi_node_domain_rhel_byol-preview",
         "osVersion": "byol_rhel_7_2_platform_10_1_1"
     },
     "resources": [
