@@ -135,7 +135,7 @@
                         "caching": "ReadWrite",
                         "createOption": "FromImage",
                         "vhd": {
-                            "uri": "[concat('https://', parameters('storageName'), '.blob.core.windows.net/vhds/', parameters('dbVMName'), '.osdisk.vhd')]"
+                            "uri": "[concat('https://', parameters('storageName'), '.blob.core.windows.net/vhds/', parameters('dbVMName'), uniquestring(resourceGroup().id), '.osdisk.vhd')]"
                         }
                     }
                 },
@@ -170,7 +170,7 @@
                             ]
                         },
                         "protectedSettings": {
-                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -file ', variables('extScriptFile'), ' -dbUserName ', parameters('DBUser'), ' -dbPassword ', parameters('DBPassword'))]"
+                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -file ', variables('extScriptFile'), ' -dbUserName ', parameters('DBUser'), ' -dbPassword \"', parameters('DBPassword'), '\"')]"
                         }
                     }
                 }
