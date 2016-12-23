@@ -26,9 +26,10 @@ Param(
   [string]$infaLicense
 )
 
-echo $domainHost $domainName $domainUser $domainPassword $nodeName $nodePort $dbType $dbName $dbUser $dbPassword $dbHost $dbPort $sitekeyKeyword $joinDomain $masterNodeHost $osUserName $infaEdition $storageName $storageKey $infaLicense
+#echo $domainHost $domainName $domainUser $domainPassword $nodeName $nodePort $dbType $dbName $dbUser $dbPassword $dbHost $dbPort $sitekeyKeyword $joinDomain $masterNodeHost $osUserName $infaEdition $storageName $storageKey $infaLicense
 
 #Adding Windows firewall inbound rule
+echo Adding firewall rules for Informatica domain service ports
 netsh  advfirewall firewall add rule name="Informatica_PowerCenter" dir=in action=allow profile=any localport=6005-6113 protocol=TCP
 
 $shareName = "infaaeshare"
@@ -53,6 +54,7 @@ $CLOUD_SUPPORT_ENABLE = "1"
 if($infaLicense -ne "nolicense" -and $joinDomain -eq 0) {
 	$CLOUD_SUPPORT_ENABLE = "0"
 	$infaLicenseFile = $env:SystemDrive + "\Informatica\license.key"
+	echo Getting Informatica license
 	wget $infaLicense -OutFile $infaLicenseFile
 }
 
@@ -62,6 +64,7 @@ if($joinDomain -eq 1) {
     # This is buffer time for master node to start
     Start-Sleep -s 300
 } else {
+	echo Creating shared directory on Azure storage
     cd $utilityHome
     java -jar iadutility.jar createAzureFileShare -storageaccesskey $storageKey -storagename $storageName
 }
@@ -70,6 +73,7 @@ $env:USERNAME = $osUserName
 $env:USERDOMAIN = $env:COMPUTERNAME
 
 #Mounting azure shared file drive
+echo Mounting the shared directory
 $cmd = "net use I: \\$storageName.file.core.windows.net\$shareName /u:$storageName $storageKey" 
 $cmd | Set-Content "$env:SystemDrive\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\MountShareDrive.cmd"
 
@@ -130,6 +134,7 @@ runas /user:$osUserName net use I: \\$storageName.file.core.windows.net\$shareNa
 Rename-Item $installerHome/source $installerHome/source_temp
 mkdir $installerHome/source
 
+echo Installing Informatica domain
 cd $installerHome
 $installCmd = $installerHome + "\silentInstall.bat"
 Start-Process $installCmd -Verb runAs -workingdirectory $installerHome -wait | Out-Null

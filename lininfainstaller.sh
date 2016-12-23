@@ -27,8 +27,7 @@ domainLicenseURL=${18}
 
 echo Starting Informatica setup...
 echo Number of parameters $#
-echo $domainHost $domainName $domainUser $domainPassword $nodeName $nodePort $dbType $dbName $dbUser $dbPassword $dbHost $dbPort $sitekeyKeyword $joinDomain osUserName $storageName $storageKey $domainLicenseURL
-
+#echo $domainHost $domainName $domainUser $domainPassword $nodeName $nodePort $dbType $dbName $dbUser $dbPassword $dbHost $dbPort $sitekeyKeyword $joinDomain osUserName $storageName $storageKey $domainLicenseURL
 
 #Usage
 if [ $# -ne 18 ]
@@ -72,7 +71,7 @@ if [ "$domainLicenseURL" != "nolicense" -a $joinDomain -eq 0 ]
 then
 	cloudsupportenable=0
 	cd $utilityhome
-	echo Getting Informatica license if provided
+	echo Getting Informatica license
 	java -jar iadutility.jar downloadHttpUrlFile -url $domainLicenseURL -localpath $informaticaopt/license.key
 fi
 
@@ -90,7 +89,6 @@ else
 fi
 
 echo Mounting the shared directory
-yum -y install cifs-utils
 mountdir=/mnt/infaaeshare
 mkdir $mountdir
 mount -t cifs //$storageName.file.core.windows.net/infaaeshare $mountdir -o vers=3.0,username=$storageName,password=$storageKey,dir_mode=0777,file_mode=0777
