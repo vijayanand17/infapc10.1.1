@@ -47,8 +47,8 @@
                         },
                         "constraints": {
                             "required": true,
-                            "regex": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\s\\w])(?!.*[\"]).{8,123}$",
-                            "validationMessage": "Password must be at least 8 characters in length. Should contain at least one special character, number, upper-case and lower-case character. Double quotes(\") is not allowed"
+                            "regex": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\s\\w])(?!.*['$]).{8,123}$",
+                            "validationMessage": "Password must be at least 8 characters in length. Should contain at least one special character, number, upper-case and lower-case character. Single quote(') and dollar($) is not allowed"
                         },
                         "options": {
                             "hideConfirmation": false
@@ -65,8 +65,8 @@
                         },
                         "constraints": {
                             "required": true,
-                            "regex": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\s\\w])(?!.*[\"]).{8,123}$",
-                            "validationMessage": "Keyphrase must be at least 8 characters in length. Should contain at least one special character, number, upper-case and lower-case character. Double quotes(\") is not allowed"
+                            "regex": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\s\\w])(?!.*['$]).{8,123}$",
+                            "validationMessage": "Keyphrase must be at least 8 characters in length. Should contain at least one special character, number, upper-case and lower-case character. Single quote(') and dollar($) is not allowed"
                         },
                         "options": {
                             "hideConfirmation": true
@@ -336,8 +336,8 @@
                                 },
                                 "constraints": {
                                     "required": true,
-                                    "regex": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\s\\w])(?!.*[\"]).{8,123}$",
-                                    "validationMessage": "Password must be at least 8 characters in length. Should contain at least one special character, number, upper-case and lower-case character. Double quotes(\") is not allowed"
+                                    "regex": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\s\\w])(?!.*['$]).{8,123}$",
+                                    "validationMessage": "Password must be at least 8 characters in length. Should contain at least one special character, number, upper-case and lower-case character. Single quote(') and dollar($) is not allowed"
                                 },
                                 "options": {
                                     "hideConfirmation": false
