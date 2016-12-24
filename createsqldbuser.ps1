@@ -71,7 +71,7 @@ mkdir -Path C:\Informatica\Archive\scripts 2> $null
 
 writeLog "Creating user: $dbUserName"
 
-$newLogin = "CREATE LOGIN " + $dbUserName +  " WITH PASSWORD = '" + $dbPassword + "'"
+$newLogin = "CREATE LOGIN " + $dbUserName +  " WITH PASSWORD = '" + ($dbPassword -replace "'","''") + "'"
 $newUser = "CREATE USER " + $dbUserName + " FOR LOGIN " + $dbUserName + " WITH DEFAULT_SCHEMA = " + $dbUserName
 $updateUserRole = "ALTER ROLE db_datareader ADD MEMBER " + $dbUserName + ";" + 
                         "ALTER ROLE db_datawriter ADD MEMBER " + $dbUserName + ";" + 
