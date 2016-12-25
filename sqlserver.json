@@ -170,7 +170,7 @@
                             ]
                         },
                         "protectedSettings": {
-                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -file ', variables('extScriptFile'), ' -dbUserName ', parameters('DBUser'), ' -dbPassword \"', parameters('DBPassword'), '\"')]"
+                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -file ', variables('extScriptFile'), ' -dbUserName \"', parameters('DBUser'), '\" -dbPassword \"', parameters('DBPassword'), '\"')]"
                         }
                     }
                 }
