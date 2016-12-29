@@ -27,7 +27,7 @@ domainLicenseURL=${18}
 
 echo Starting Informatica setup...
 echo Number of parameters $#
-echo $domainHost $domainName $domainUser $domainPassword $nodeName $nodePort $dbType $dbName $dbUser $dbPassword $dbHost $dbPort $sitekeyKeyword $joinDomain osUserName $storageName $storageKey $domainLicenseURL
+#echo $domainHost $domainName $domainUser $domainPassword $nodeName $nodePort $dbType $dbName $dbUser $dbPassword $dbHost $dbPort $sitekeyKeyword $joinDomain $osUserName $storageName $storageKey $domainLicenseURL
 
 #Usage
 if [ $# -ne 18 ]
