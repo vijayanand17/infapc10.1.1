@@ -23,7 +23,7 @@
                         "constraints": {
                             "allowedValues": [
                                 {
-                                    "label": "Informatica PowerCenter 10.1.1",
+                                    "label": "10.1.1",
                                     "value": "1011"
                                 }
                             ]
