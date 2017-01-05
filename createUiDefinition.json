@@ -18,7 +18,7 @@
                         "name": "infaVersion",
                         "type": "Microsoft.Common.DropDown",
                         "label": "Informatica PowerCenter Version",
-                        "defaultValue": "Informatica PowerCenter 10.1.1",
+                        "defaultValue": "10.1.1",
                         "toolTip": "Informatica PowerCenter product version.",
                         "constraints": {
                             "allowedValues": [
