@@ -194,6 +194,13 @@
                 "description": "Node VM count"
             }
         },
+        "infaVersion": {
+            "type": "string",
+            "defaultValue": "1011",
+            "metadata": {
+                "description": "Informatica version"
+            }
+        },
         "infaDomainName": {
             "type": "string",
             "minLength": 4,

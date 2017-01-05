@@ -15,6 +15,21 @@
                 "bladeTitle": "Informatica Domain Settings",
                 "elements": [
                     {
+                        "name": "infaVersion",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "Informatica PowerCenter Version",
+                        "defaultValue": "Informatica PowerCenter 10.1.1",
+                        "toolTip": "Informatica PowerCenter product version.",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "label": "Informatica PowerCenter 10.1.1",
+                                    "value": "1011"
+                                }
+                            ]
+                        }
+                    },
+                    {
                         "name": "infaDomainName",
                         "type": "Microsoft.Common.TextBox",
                         "label": "Informatica domain name",
@@ -412,6 +427,7 @@
             "nodeVMAdminSshPublicKey": "[steps('nodeVMConfiguration').nodeVMAdminPasswordLin.sshPublicKey]",
             "nodeVMSize": "[steps('nodeVMConfiguration').nodeVMSize]",
             "nodeVMOS": "[steps('nodeVMConfiguration').nodeVMOS]",
+            "infaVersion":  "[steps('infaDomainConfiguration').infaVersion]",
             "infaDomainName": "[steps('infaDomainConfiguration').infaDomainName]",
             "infaDomainUser": "[steps('infaDomainConfiguration').infaDomainUser]",
             "infaDomainPassword": "[steps('infaDomainConfiguration').infaDomainPassword]",
