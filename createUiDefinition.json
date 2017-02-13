@@ -19,7 +19,7 @@
                         "type": "Microsoft.Common.DropDown",
                         "label": "Informatica PowerCenter version",
                         "defaultValue": "10.1.1",
-                        "toolTip": "Informatica PowerCenter product version.",
+                        "toolTip": "Informatica PowerCenter product version",
                         "constraints": {
                             "allowedValues": [
                                 {
@@ -27,7 +27,8 @@
                                     "value": "1011"
                                 }
                             ]
-                        }
+                        },
+                        "visible": true
                     },
                     {
                         "name": "infaDomainName",
@@ -234,10 +235,24 @@
                             "Standard_DS2",
                             "Standard_DS2_v2"
                         ],
-                        "constraints": {
-                        },
                         "osPlatform": "Windows",
-                        "count": "[steps('nodeVMConfiguration').domainNodeCount]"
+                        "count": "[steps('nodeVMConfiguration').domainNodeCount]",
+                        "visible": "[equals(steps('nodeVMConfiguration').nodeVMOS, 'windows')]"
+                    },
+                    {
+                        "name": "nodeVMSize",
+                        "type": "Microsoft.Compute.SizeSelector",
+                        "label": "Machine size",
+                        "toolTip": "The size of the machine",
+                        "recommendedSizes": [
+                            "Standard_DS11",
+                            "Standard_DS11_v2",
+                            "Standard_DS2",
+                            "Standard_DS2_v2"
+                        ],
+                        "osPlatform": "Linux",
+                        "count": "[steps('nodeVMConfiguration').domainNodeCount]",
+                        "visible": "[equals(steps('nodeVMConfiguration').nodeVMOS, 'linux')]"
                     }
                 ]
             },
@@ -268,7 +283,8 @@
                                             "value": "sqlserver"
                                         }
                                     ]
-                                }
+                                },
+                                "visible": true
                             },
                             {
                                 "name": "databaseName",
@@ -351,7 +367,7 @@
                                 },
                                 "constraints": {
                                     "required": true,
-                                    "regex": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\s\\w])(?!.*[\"$]).{8,123}$",
+                                    "regex": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\s\\w])(?!.*[\"$])(?!dbo)(?!guest)(?!sys)(?!sa).{8,123}$",
                                     "validationMessage": "Password must be at least 8 characters in length. Should contain at least one special character, number, upper-case and lower-case character. Double quote(\") and dollar($) is not allowed"
                                 },
                                 "options": {
