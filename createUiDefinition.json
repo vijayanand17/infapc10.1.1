@@ -225,7 +225,7 @@
                         "visible": "[equals(steps('nodeVMConfiguration').nodeVMOS, 'linux')]"
                     },
                     {
-                        "name": "nodeVMSize",
+                        "name": "nodeVMSizeWin",
                         "type": "Microsoft.Compute.SizeSelector",
                         "label": "Machine size",
                         "toolTip": "The size of the machine",
@@ -240,7 +240,7 @@
                         "visible": "[equals(steps('nodeVMConfiguration').nodeVMOS, 'windows')]"
                     },
                     {
-                        "name": "nodeVMSize",
+                        "name": "nodeVMSizeLin",
                         "type": "Microsoft.Compute.SizeSelector",
                         "label": "Machine size",
                         "toolTip": "The size of the machine",
@@ -441,7 +441,7 @@
             "nodeVMAdminUsername": "[coalesce(steps('nodeVMConfiguration').nodeVMAdminUsernameWin, steps('nodeVMConfiguration').nodeVMAdminUsernameLin)]",
             "nodeVMAdminPassword": "[coalesce(steps('nodeVMConfiguration').nodeVMAdminPasswordWin.password, steps('nodeVMConfiguration').nodeVMAdminPasswordLin.password)]",
             "nodeVMAdminSshPublicKey": "[steps('nodeVMConfiguration').nodeVMAdminPasswordLin.sshPublicKey]",
-            "nodeVMSize": "[steps('nodeVMConfiguration').nodeVMSize]",
+            "nodeVMSize": "[coalesce(steps('nodeVMConfiguration').nodeVMSizeWin, steps('nodeVMConfiguration').nodeVMSizeLin)]",
             "nodeVMOS": "[steps('nodeVMConfiguration').nodeVMOS]",
             "infaVersion":  "[steps('infaDomainConfiguration').infaVersion]",
             "infaDomainName": "[steps('infaDomainConfiguration').infaDomainName]",
