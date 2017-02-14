@@ -354,7 +354,7 @@
                                 "toolTip": "Database user to be created for communication between Domain and Domain database",
                                 "constraints": {
                                     "required": true,
-                                    "regex": "^[a-z0-9A-Z_]{3,30}$",
+                                    "regex": "^[a-z0-9A-Z_](?![dbo])(?![guest])(?![sys])(?![sa]){3,30}$",
                                     "validationMessage": "Only alphanumeric characters and underscore are allowed, and the value must be 3-30"
                                 }
                             },
@@ -367,7 +367,7 @@
                                 },
                                 "constraints": {
                                     "required": true,
-                                    "regex": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\s\\w])(?!.*[\"$])(?!dbo)(?!guest)(?!sys)(?!sa).{8,123}$",
+                                    "regex": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\s\\w])(?!.*[\"$]).{8,123}$",
                                     "validationMessage": "Password must be at least 8 characters in length. Should contain at least one special character, number, upper-case and lower-case character. Double quote(\") and dollar($) is not allowed"
                                 },
                                 "options": {
