@@ -312,9 +312,6 @@
             "name": "vnetSetup",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2016-09-01",
-            "dependsOn": [
-                "Microsoft.Resources/deployments/storageSetup"
-            ],
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {

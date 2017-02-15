@@ -41,7 +41,7 @@
                             "description": "Enabling endpoints on ports required for Informatica.",
                             "protocol": "TCP",
                             "sourcePortRange": "*",
-                            "destinationPortRange": "*",
+                            "destinationPortRange": "6005-6008",
                             "sourceAddressPrefix": "*",
                             "destinationAddressPrefix": "*",
                             "access": "Allow",
