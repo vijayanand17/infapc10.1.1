@@ -354,7 +354,7 @@
                                 "toolTip": "Database user to be created for communication between Domain and Domain database",
                                 "constraints": {
                                     "required": true,
-                                    "regex": "^[a-z0-9A-Z_](?![dbo])(?![guest])(?![sys])(?![sa]){3,30}$",
+                                    "regex": "^[a-z0-9A-Z_]{3,30}$",
                                     "validationMessage": "Only alphanumeric characters and underscore are allowed, and the value must be 3-30"
                                 }
                             },
@@ -443,7 +443,7 @@
             "nodeVMAdminSshPublicKey": "[steps('nodeVMConfiguration').nodeVMAdminPasswordLin.sshPublicKey]",
             "nodeVMSize": "[coalesce(steps('nodeVMConfiguration').nodeVMSizeWin, steps('nodeVMConfiguration').nodeVMSizeLin)]",
             "nodeVMOS": "[steps('nodeVMConfiguration').nodeVMOS]",
-            "infaVersion":  "[steps('infaDomainConfiguration').infaVersion]",
+            "infaVersion": "[steps('infaDomainConfiguration').infaVersion]",
             "infaDomainName": "[steps('infaDomainConfiguration').infaDomainName]",
             "infaDomainUser": "[steps('infaDomainConfiguration').infaDomainUser]",
             "infaDomainPassword": "[steps('infaDomainConfiguration').infaDomainPassword]",
