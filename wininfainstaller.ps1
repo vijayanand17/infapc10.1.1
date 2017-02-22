@@ -52,10 +52,15 @@ $propertyFile = $installerHome + "\SilentInput.properties"
 $infaLicenseFile = ""
 $CLOUD_SUPPORT_ENABLE = "1"
 if($infaLicense -ne "nolicense" -and $joinDomain -eq 0) {
-	$CLOUD_SUPPORT_ENABLE = "0"
 	$infaLicenseFile = $env:SystemDrive + "\Informatica\license.key"
 	echo Getting Informatica license
 	wget $infaLicense -OutFile $infaLicenseFile
+
+	if (Test-Path $infaLicenseFile) {
+		$CLOUD_SUPPORT_ENABLE = "0"
+	} else {
+		echo Error downloading license file from URL $infaLicense
+	}
 }
 
 $createDomain = 1

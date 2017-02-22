@@ -69,10 +69,16 @@ chmod -R 777 $JRE_HOME
 cloudsupportenable=1
 if [ "$domainLicenseURL" != "nolicense" -a $joinDomain -eq 0 ]
 then
-	cloudsupportenable=0
-	cd $utilityhome
 	echo Getting Informatica license
+	cd $utilityhome
 	java -jar iadutility.jar downloadHttpUrlFile -url $domainLicenseURL -localpath $informaticaopt/license.key
+
+	if [ -f $informaticaopt/license.key ]
+	then
+		cloudsupportenable=0
+	else
+		echo Error downloading license file from URL $domainLicenseURL
+	fi
 fi
 
 
