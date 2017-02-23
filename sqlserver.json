@@ -35,7 +35,7 @@
         "subnetId": {
             "type": "string"
         },
-        "nsgName": { 
+        "nsgName": {
             "type": "string"
         },
         "baseUrl": {
@@ -87,15 +87,15 @@
                     {
                         "name": "ipconfig1",
                         "properties": {
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
+                            },
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
                                 "id": "[parameters('SubnetId')]"
                             },
                             "publicIPAddress": {
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicDNSName'))]"
-                            },
-                            "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
                             }
                         }
                     }
