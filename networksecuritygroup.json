@@ -67,5 +67,11 @@
                 ]
             }
         }
-    ]
+    ],
+    "outputs": {
+        "nsgId": {
+            "value": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]",
+            "type": "string"
+        }
+    }
 }

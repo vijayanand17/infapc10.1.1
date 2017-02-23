@@ -22,7 +22,6 @@
         }
     },
     "variables": {
-        "NetworkSecurityGroupName": "NetworkSecurityGroup"
     },
     "resources": [
         {
@@ -31,7 +30,6 @@
             "location": "[parameters('location')]",
             "apiVersion": "2016-10-01",
             "dependsOn": [
-                "[concat('Microsoft.Network/networkSecurityGroups/', variables('NetworkSecurityGroupName'))]"
             ],
             "properties": {
                 "addressSpace": {
