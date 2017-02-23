@@ -35,6 +35,9 @@
         "subnetId": {
             "type": "string"
         },
+        "nsgName": { 
+            "type": "string"
+        },
         "baseUrl": {
             "type": "string"
         }
@@ -90,6 +93,9 @@
                             },
                             "publicIPAddress": {
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicDNSName'))]"
+                            },
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
                             }
                         }
                     }

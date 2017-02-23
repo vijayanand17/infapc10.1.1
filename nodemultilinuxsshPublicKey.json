@@ -20,6 +20,9 @@
         "subnetId": {
             "type": "string"
         },
+        "nsgName": { 
+            "type": "string"
+        },
         "dbVMName": {
             "type": "string"
         },
@@ -139,6 +142,9 @@
                             },
                             "publicIPAddress": {
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('nodeVMDNSName'), '1'))]"
+                            },
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
                             }
                         }
                     }
@@ -279,6 +285,9 @@
                             },
                             "publicIPAddress": {
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('nodeVMDNSName'), add(copyIndex(), 2)))]"
+                            },
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
                             }
                         }
                     }

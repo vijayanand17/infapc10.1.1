@@ -233,7 +233,7 @@
                 "description": "Informatica domain encryption key keyphrase"
             }
         },
-        "infaDomainLicense": { 
+        "infaDomainLicense": {
             "type": "securestring",
             "defaultValue": "nolicense",
             "metadata": {
@@ -254,6 +254,7 @@
 
         "storageUri": "[concat(variables('baseuri'), 'storage', parameters('storageExistingOrNew'),'.json')]",
         "vnetUri": "[concat(variables('baseuri'), 'vnet', parameters('vnetExistingOrNew'),'.json')]",
+        "nsgUri": "[concat(variables('baseuri'), 'networksecuritygroup.json')]",
         "dbUri": "[concat(variables('baseuri'), parameters('dbType'),'.json')]",
 
         "nodeUriList": [
@@ -279,7 +280,9 @@
             "existing": "[resourceId(parameters('existingStorageRG'), 'Microsoft.Storage/storageAccounts', parameters('storageName'))]",
             "new": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
         },
-        "storageID": "[variables('storageIDs')[parameters('storageExistingOrNew')]]"
+        "storageID": "[variables('storageIDs')[parameters('storageExistingOrNew')]]",
+
+        "nsgName": "NetworkSecurityGroup"
     },
     "resources": [
         {
@@ -341,12 +344,33 @@
             }
         },
         {
+            "name": "nsgSetup",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2016-09-01",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('nsgUri')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "nsgName": { 
+                        "value": "[variables('nsgName')]"
+                    }
+                }
+            }
+        },
+        {
             "name": "databaseSetup",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2016-09-01",
             "dependsOn": [
                 "Microsoft.Resources/deployments/storageSetup",
-                "Microsoft.Resources/deployments/vnetSetup"
+                "Microsoft.Resources/deployments/vnetSetup",
+                "Microsoft.Resources/deployments/nsgSetup"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -388,7 +412,10 @@
                     "subnetID": {
                         "value": "[variables('subnetID')]"
                     },
-                    "baseUrl": { 
+                    "nsgName": { 
+                        "value": "[variables('nsgName')]"
+                    },
+                    "baseUrl": {
                         "value": "[variables('baseUri')]"
                     }
                 }
@@ -408,7 +435,7 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "location": { 
+                    "location": {
                         "value": "[parameters('location')]"
                     },
                     "storageName": {
@@ -425,6 +452,9 @@
                     },
                     "subnetId": {
                         "value": "[variables('subnetID')]"
+                    },
+                    "nsgName": { 
+                        "value": "[variables('nsgName')]"
                     },
                     "dbVMName": {
                         "value": "[parameters('dbVMName')]"
@@ -471,10 +501,10 @@
                     "infaKeyword": {
                         "value": "[parameters('infaKeyword')]"
                     },
-                    "infaDomainLicense": { 
+                    "infaDomainLicense": {
                         "value": "[parameters('infaDomainLicense')]"
                     },
-                    "baseUrl": { 
+                    "baseUrl": {
                         "value": "[variables('baseUri')]"
                     }
                 }

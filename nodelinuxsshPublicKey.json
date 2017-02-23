@@ -20,6 +20,9 @@
         "subnetId": {
             "type": "string"
         },
+        "nsgName": { 
+            "type": "string"
+        },
         "dbVMName": {
             "type": "string"
         },
@@ -138,6 +141,9 @@
                             },
                             "publicIPAddress": {
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('nodeVMDNSName'))]"
+                            },
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
                             }
                         }
                     }

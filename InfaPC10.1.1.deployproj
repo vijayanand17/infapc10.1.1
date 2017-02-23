@@ -26,7 +26,7 @@
   <!-- vertag<:>end -->
   <ItemGroup>
     <Content Include="azuredeploy.json" />
-    <Content Include="azuredeploy.parameters.json" />
+    <None Include="azuredeploy.parameters.json" />
     <None Include="createsqldbuser.ps1" />
     <None Include="createUiDefinition.json" />
     <None Include="Deployment.targets">
@@ -35,6 +35,7 @@
     <Content Include="Deploy-AzureResourceGroup.ps1" />
     <None Include="lininfainstaller.sh" />
     <None Include="mainTemplate.json" />
+    <None Include="networksecuritygroup.json" />
     <None Include="nodelinuxpassword.json" />
     <None Include="nodelinuxsshPublicKey.json" />
     <None Include="nodemultilinuxpassword.json" />
