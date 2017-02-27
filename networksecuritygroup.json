@@ -27,9 +27,9 @@
             "properties": {
                 "securityRules": [
                     {
-                        "name": "EndPointRule",
+                        "name": "InformaticaService",
                         "properties": {
-                            "description": "Enabling endpoints on ports required for Informatica.",
+                            "description": "Enabling ports required for Informatica.",
                             "protocol": "TCP",
                             "sourcePortRange": "*",
                             "destinationPortRange": "6005-6008",
