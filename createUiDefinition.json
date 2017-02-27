@@ -354,8 +354,7 @@
                                 "toolTip": "Database user to be created for communication between Domain and Domain database",
                                 "constraints": {
                                     "required": true,
-                                    "regex": "^[a-z0-9A-Z_]{3,30}$",
-                                    "validationMessage": "Only alphanumeric characters and underscore are allowed, and the value must be 3-30"
+                                    "regex": "(?!^(p|P)(u|U)(b|B)(l|L)(i|I)(c|C)$)(?!^(d|D)(b|B)(o|O)$)(?!^(s|S)(y|Y)(s|S)$)(?!^(g|G)(u|U)(e|E)(s|S)(t|T)$)(^[a-zA-Z][a-zA-Z0-9_-]{3,128}.*$)",
                                 }
                             },
                             {
