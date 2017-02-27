@@ -19,6 +19,9 @@
         },
         "existingVnetRG": {
             "type": "string"
+        },
+        "informaticaTags": {
+            "type": "object" 
         }
     },
     "variables": { 

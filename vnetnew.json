@@ -19,6 +19,9 @@
         },
         "existingVnetRG": {
             "type": "string"
+        },
+        "informaticaTags": {
+            "type": "object" 
         }
     },
     "variables": {
@@ -31,6 +34,10 @@
             "apiVersion": "2016-10-01",
             "dependsOn": [
             ],
+            "tags": {
+                "displayName": "vnet",
+                "provider": "[toUpper(parameters('informaticaTags').provider)]"
+            },
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [

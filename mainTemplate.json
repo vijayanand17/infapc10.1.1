@@ -247,6 +247,12 @@
                 "artifactsBaseUrl": "https://raw.githubusercontent.com/vijayanand17/infapc10.1.1/master"
             },
             "defaultValue": "https://raw.githubusercontent.com/vijayanand17/infapc10.1.1/master"
+        },
+        "informaticaTags": {
+            "type": "object",
+            "defaultValue": {
+                "provider": "AACF690D-C725-4C78-9B1E-E586595B369F"
+            }
         }
     },
     "variables": {
@@ -307,6 +313,9 @@
                     },
                     "existingStorageRG": {
                         "value": "[parameters('existingStorageRG')]"
+                    },
+                    "informaticaTags": { 
+                        "value": "[parameters('informaticaTags')]"
                     }
                 }
             }
@@ -339,6 +348,9 @@
                     },
                     "existingVnetRG": {
                         "value": "[parameters('existingVnetRG')]"
+                    },
+                    "informaticaTags": { 
+                        "value": "[parameters('informaticaTags')]"
                     }
                 }
             }
@@ -357,8 +369,11 @@
                     "location": {
                         "value": "[parameters('location')]"
                     },
-                    "nsgName": { 
+                    "nsgName": {
                         "value": "[variables('nsgName')]"
+                    },
+                    "informaticaTags": { 
+                        "value": "[parameters('informaticaTags')]"
                     }
                 }
             }
@@ -412,11 +427,14 @@
                     "subnetID": {
                         "value": "[variables('subnetID')]"
                     },
-                    "nsgName": { 
+                    "nsgName": {
                         "value": "[variables('nsgName')]"
                     },
                     "baseUrl": {
                         "value": "[variables('baseUri')]"
+                    },
+                    "informaticaTags": { 
+                        "value": "[parameters('informaticaTags')]"
                     }
                 }
             }
@@ -453,7 +471,7 @@
                     "subnetId": {
                         "value": "[variables('subnetID')]"
                     },
-                    "nsgName": { 
+                    "nsgName": {
                         "value": "[variables('nsgName')]"
                     },
                     "dbVMName": {
@@ -506,6 +524,9 @@
                     },
                     "baseUrl": {
                         "value": "[variables('baseUri')]"
+                    },
+                    "informaticaTags": { 
+                        "value": "[parameters('informaticaTags')]"
                     }
                 }
             }

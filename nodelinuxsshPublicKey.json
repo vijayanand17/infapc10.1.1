@@ -80,6 +80,9 @@
         },
         "baseUrl": {
             "type": "string"
+        },
+        "informaticaTags": {
+            "type": "object" 
         }
     },
     "variables": {
@@ -110,7 +113,8 @@
             "dependsOn": [ ],
 
             "tags": {
-                "displayName": "publicip"
+                "displayName": "publicip",
+                "provider": "[toUpper(parameters('informaticaTags').provider)]"
             },
             "properties": {
                 "publicIPAllocationMethod": "Dynamic",
@@ -128,7 +132,8 @@
                 "[concat('Microsoft.Network/publicIPAddresses/', variables('nodeVMDNSName'))]"
             ],
             "tags": {
-                "displayName": "niccard"
+                "displayName": "niccard",
+                "provider": "[toUpper(parameters('informaticaTags').provider)]"
             },
             "properties": {
                 "ipConfigurations": [
@@ -160,7 +165,8 @@
                 "[concat('Microsoft.Network/networkInterfaces/', variables('nodeVMNicPrefix'), add(variables('index'), 1))]"
             ],
             "tags": {
-                "displayName": "nodevm"
+                "displayName": "nodevm",
+                "provider": "[toUpper(parameters('informaticaTags').provider)]"
             },
             "plan": {
                 "name": "[variables('osVersion')]",
@@ -220,7 +226,8 @@
                         "[concat('Microsoft.Compute/virtualMachines/', parameters('nodeVMNamePrefix'), add(variables('index'), 1))]"
                     ],
                     "tags": {
-                        "displayName": "informaticaextension"
+                        "displayName": "informaticaextension",
+                        "provider": "[toUpper(parameters('informaticaTags').provider)]"
                     },
                     "properties": {
                         "publisher": "Microsoft.OSTCExtensions",

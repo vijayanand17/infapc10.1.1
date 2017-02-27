@@ -14,6 +14,9 @@
         },
         "existingStorageRG": {
             "type": "string"
+        },
+        "informaticaTags": {
+            "type": "object" 
         }
     },
     "variables": {
@@ -25,6 +28,10 @@
             "location": "[parameters('location')]",
             "apiVersion": "2016-01-01",
             "dependsOn": [ ],
+            "tags": {
+                "displayName": "storage",
+                "provider": "[toUpper(parameters('informaticaTags').provider)]"
+            },
             "sku": {
                 "name": "[parameters('storageType')]"
             },

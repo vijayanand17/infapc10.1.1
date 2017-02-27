@@ -40,6 +40,9 @@
         },
         "baseUrl": {
             "type": "string"
+        },
+        "informaticaTags": {
+            "type": "object" 
         }
     },
     "variables": {
@@ -62,7 +65,8 @@
             "apiVersion": "2016-10-01",
             "dependsOn": [ ],
             "tags": {
-                "displayName": "PubIP01"
+                "displayName": "dbpublicip",
+                "provider": "[toUpper(parameters('informaticaTags').provider)]"
             },
             "properties": {
                 "publicIPAllocationMethod": "Dynamic",
@@ -80,7 +84,8 @@
                 "[concat('Microsoft.Network/publicIPAddresses/', variables('publicDNSName'))]"
             ],
             "tags": {
-                "displayName": "DBVMNic"
+                "displayName": "dbniccard",
+                "provider": "[toUpper(parameters('informaticaTags').provider)]"
             },
             "properties": {
                 "ipConfigurations": [
@@ -116,7 +121,8 @@
                 "product": "[variables('imageOffer')]"
             },
             "tags": {
-                "displayName": "VM01"
+                "displayName": "dbvm",
+                "provider": "[toUpper(parameters('informaticaTags').provider)]"
             },
             "properties": {
                 "hardwareProfile": {
@@ -161,7 +167,8 @@
                         "[concat('Microsoft.Compute/virtualMachines/', parameters('dbVMName'))]"
                     ],
                     "tags": {
-                        "displayName": "ScriptExtDB"
+                        "displayName": "ScriptExtDB",
+                        "provider": "[toUpper(parameters('informaticaTags').provider)]"
                     },
                     "properties": {
                         "publisher": "Microsoft.Compute",

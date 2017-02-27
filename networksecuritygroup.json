@@ -7,6 +7,9 @@
         },
         "nsgName": {
             "type": "string"
+        },
+        "informaticaTags": {
+            "type": "object" 
         }
     },
     "variables": {
@@ -18,7 +21,8 @@
             "name": "[parameters('nsgName')]",
             "location": "[parameters('location')]",
             "tags": {
-                "displayName": "NetworkSecurityGroup"
+                "displayName": "NetworkSecurityGroup",
+                "provider": "[toUpper(parameters('informaticaTags').provider)]"
             },
             "properties": {
                 "securityRules": [
