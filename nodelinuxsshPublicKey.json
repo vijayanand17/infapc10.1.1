@@ -87,7 +87,7 @@
     },
     "variables": {
         "index": 0,
-        "nodeVMDNSName": "[toLower(concat(parameters('nodeVMNamePrefix'), add(variables('Index'), 1), uniqueString(resourceGroup().id)))]",
+        "nodeVMDNSName": "[toLower(concat(parameters('nodeVMNamePrefix'), add(variables('Index'), 1), uniqueString(resourceGroup().id, deployment().name)))]",
         "nodeVMNicPrefix": "[concat(parameters('nodeVMNamePrefix'),'Nic')]",
 
         "extScriptURI": "[parameters('baseUrl')]",
@@ -204,7 +204,7 @@
                         "caching": "ReadWrite",
                         "createOption": "FromImage",
                         "vhd": {
-                            "uri": "[concat('https://', parameters('storageName'), '.blob.core.windows.net/vhds/', parameters('nodeVMNamePrefix'), uniquestring(resourceGroup().id, deployment().name), add(variables('index'), 1), '.osdisk.vhd')]"
+                            "uri": "[concat('https://', parameters('storageName'), '.blob.core.windows.net/vhds/', parameters('nodeVMNamePrefix'), uniqueString(resourceGroup().id, deployment().name), add(variables('index'), 1), '.osdisk.vhd')]"
                         }
                     }
                 },
