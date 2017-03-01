@@ -84,6 +84,7 @@ $cmd | Set-Content "$env:SystemDrive\ProgramData\Microsoft\Windows\Start Menu\Pr
 
 runas /user:$osUserName net use I: \\$storageName.file.core.windows.net\$shareName /u:$storageName $storageKey
 
+echo Editing Informatica silent installation file
 (gc $propertyFile | %{$_ -replace '^LICENSE_KEY_LOC=.*$',"LICENSE_KEY_LOC=$infaLicenseFile"  `
 `
 -replace '^CREATE_DOMAIN=.*$',"CREATE_DOMAIN=$createDomain"  `
@@ -151,3 +152,5 @@ Rename-Item $installerHome/source_temp $installerHome/source
 if($infaLicenseFile -ne "") {
 	rm $infaLicenseFile
 }
+
+echo Informatica setup Complete.
