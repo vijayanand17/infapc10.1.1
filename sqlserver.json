@@ -167,7 +167,7 @@
                         "[concat('Microsoft.Compute/virtualMachines/', parameters('dbVMName'))]"
                     ],
                     "tags": {
-                        "displayName": "ScriptExtDB",
+                        "displayName": "informaticadbextension",
                         "provider": "[toUpper(parameters('informaticaTags').provider)]"
                     },
                     "properties": {
@@ -177,7 +177,7 @@
                         "autoUpgradeMinorVersion": true,
                         "settings": {
                             "fileUris": [
-                                "[concat(variables('ExtScriptURI'),  variables('extScriptFile'))]"
+                                "[concat(variables('extScriptURI'),  variables('extScriptFile'))]"
                             ]
                         },
                         "protectedSettings": {
