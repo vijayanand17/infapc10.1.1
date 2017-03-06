@@ -238,9 +238,8 @@
                         "osPlatform": "Windows",
                         "imageReference": {
                             "publisher": "informatica",
-                            "offer": "platform_10_1_1_multi_node_domain_windows_byol",
-                            "sku": "byol_windows_platform_10_1_1",
-                            "version": "latest"
+                            "offer": "platform_10_1_1_multi_node_domain_windows_byol-preview",
+                            "sku": "byol_windows_platform_10_1_1"
                         },
                         "count": "[steps('nodeVMConfiguration').domainNodeCount]",
                         "visible": "[equals(steps('nodeVMConfiguration').nodeVMOS, 'windows')]"
@@ -259,9 +258,8 @@
                         "osPlatform": "Linux",
                         "imageReference": {
                             "publisher": "informatica",
-                            "offer": "platform_10_1_1_multi_node_domain_rhel-7-3_byol",
-                            "sku": "byol_rhel_7_3_platform_10_1_1",
-                            "version": "latest"
+                            "offer": "platform_10_1_1_multi_node_domain_rhel-7-3_byol-preview",
+                            "sku": "byol_rhel_7_3_platform_10_1_1"
                         },
                         "count": "[steps('nodeVMConfiguration').domainNodeCount]",
                         "visible": "[equals(steps('nodeVMConfiguration').nodeVMOS, 'linux')]"
@@ -349,8 +347,7 @@
                                 "imageReference": {
                                     "publisher": "informatica",
                                     "offer": "sqlserver-2014-image",
-                                    "sku": "sqlserver-2014-image-for-pc-bdm",
-                                    "version": "latest"
+                                    "sku": "sqlserver-2014-image-for-pc-bdm"
                                 },
                                 "count": 1
                             }
