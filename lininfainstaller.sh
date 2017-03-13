@@ -71,7 +71,7 @@ if [ "$domainLicenseURL" != "nolicense" -a $joinDomain -eq 0 ]
 then
 	echo Getting Informatica license
 	cd $utilityhome
-	java -jar iadutility.jar downloadHttpUrlFile -url "$domainLicenseURL" -localpath "$informaticaopt/license.key"
+	java -jar iadutility.jar downloadHttpUrlFile -url "$(echo $domainLicenseURL | sed -e s/\ /%20/g)" -localpath "$informaticaopt/license.key"
 
 	if [ -f $informaticaopt/license.key ]
 	then
