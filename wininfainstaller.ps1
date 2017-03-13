@@ -71,7 +71,7 @@ if($joinDomain -eq 1) {
 } else {
 	echo Creating shared directory on Azure storage
     cd $utilityHome
-    java -jar iadutility.jar createAzureFileShare -storageaccesskey $storageKey -storagename $storageName
+    java -jar iadutility.jar createAzureFileShare -storageaccesskey $storageKey -storagename "$storageName"
 }
 
 $env:USERNAME = $osUserName

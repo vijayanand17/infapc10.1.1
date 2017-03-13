@@ -71,7 +71,7 @@ if [ "$domainLicenseURL" != "nolicense" -a $joinDomain -eq 0 ]
 then
 	echo Getting Informatica license
 	cd $utilityhome
-	java -jar iadutility.jar downloadHttpUrlFile -url $domainLicenseURL -localpath $informaticaopt/license.key
+	java -jar iadutility.jar downloadHttpUrlFile -url "$domainLicenseURL" -localpath "$informaticaopt/license.key"
 
 	if [ -f $informaticaopt/license.key ]
 	then
@@ -91,7 +91,7 @@ then
 else
 	echo Creating shared directory on Azure storage
 	cd $utilityhome
-    java -jar iadutility.jar createAzureFileShare -storageaccesskey $storageKey -storagename $storageName
+    java -jar iadutility.jar createAzureFileShare -storageaccesskey $storageKey -storagename "$storageName"
 fi
 
 echo Mounting the shared directory
