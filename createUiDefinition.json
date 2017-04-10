@@ -249,7 +249,10 @@
                                 "Standard_F1s",
                                 "Standard_F2s",
                                 "Standard_F1",
-                                "Standard_F2"
+                                "Standard_F2",
+                                "Basic_A0",
+                                "Basic_A1",
+                                "Basic_A2"
                             ]
                         },
                         "osPlatform": "Windows",
@@ -286,7 +289,10 @@
                                 "Standard_F1s",
                                 "Standard_F2s",
                                 "Standard_F1",
-                                "Standard_F2"
+                                "Standard_F2",
+                                "Basic_A0",
+                                "Basic_A1",
+                                "Basic_A2"
                             ]
                         },
                         "osPlatform": "Linux",
