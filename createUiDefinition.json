@@ -476,7 +476,7 @@
                         },
                         "toolTip": {
                             "virtualNetwork": "Virtual network all resource required to be part of",
-                            "subnets": ""
+                            "subnets": "Subnet all resource required to be part of"
                         },
                         "defaultValue": {
                             "name": "InfaVNET",
