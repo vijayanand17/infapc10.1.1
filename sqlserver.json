@@ -152,13 +152,13 @@
                 "storageProfile": {
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "BaseSQL2014-160517-osDisk.50111a37-8d3a-405e-9f83-00285262cb19.vhd",
+                        "name": "BaseSQL-U2-osDisk.3e9a3ca5-5279-403b-a2fc-46ce20e1a8a3.vhd",
                         "createOption": "FromImage",
                         "image": {
-                            "uri": "https://ispqa1011disks962.blob.core.windows.net/system/Microsoft.Compute/Images/vhd/BaseSQL2014-160517-osDisk.50111a37-8d3a-405e-9f83-00285262cb19.vhd"
+                            "uri": "https://ispqa1011disks962.blob.core.windows.net/system/Microsoft.Compute/Images/vhd/BaseSQL-U2-osDisk.3e9a3ca5-5279-403b-a2fc-46ce20e1a8a3.vhd"
                         },
                         "vhd": {
-                            "uri": "https://ispqa1011disks962.blob.core.windows.net/vmcontaineraf98ca85-7494-403a-84e7-98ba4d4bb9fc/osDisk.af98ca85-7494-403a-84e7-test01.vhd"
+                            "uri": "https://ispqa1011disks962.blob.core.windows.net/vmcontainer7aa848a6-ae0c-45c9-8a55-d2a26563ce6c/osDisk.7aa848a6-ae0c-45c9-Test02.vhd"
                         },
                         "caching": "ReadWrite"
                     }
