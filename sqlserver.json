@@ -42,7 +42,7 @@
             "type": "string"
         },
         "informaticaTags": {
-            "type": "object" 
+            "type": "object"
         }
     },
     "variables": {
@@ -133,7 +133,7 @@
                     "adminUsername": "[parameters('dbVMAdminUsername')]",
                     "adminPassword": "[parameters('dbVMAdminPassword')]"
                 },
-                "storageProfile": {
+                /*"storageProfile": {
                     "imageReference": {
                         "publisher": "[variables('imagePublisher')]",
                         "offer": "[variables('imageOffer')]",
@@ -148,15 +148,28 @@
                             "uri": "[concat('https://', parameters('storageName'), '.blob.core.windows.net/vhds/', parameters('dbVMName'), uniqueString(resourceGroup().id, deployment().name), '.osdisk.vhd')]"
                         }
                     }
+                },*/
+                "storageProfile": {
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "BaseSQL2014-160517-osDisk.50111a37-8d3a-405e-9f83-00285262cb19.vhd",
+                        "createOption": "FromImage",
+                        "image": {
+                            "uri": "https://ispqa1011disks962.blob.core.windows.net/system/Microsoft.Compute/Images/vhd/BaseSQL2014-160517-osDisk.50111a37-8d3a-405e-9f83-00285262cb19.vhd"
+                        },
+                        "vhd": {
+                            "uri": "https://ispqa1011disks962.blob.core.windows.net/vmcontaineraf98ca85-7494-403a-84e7-98ba4d4bb9fc/osDisk.af98ca85-7494-403a-84e7-test01.vhd"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "networkProfile": {
+                        "networkInterfaces": [
+                            {
+                                "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('dbVMNicName'))]"
+                            }
+                        ]
+                    }
                 },
-                "networkProfile": {
-                    "networkInterfaces": [
-                        {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('dbVMNicName'))]"
-                        }
-                    ]
-                }
-            },
             "resources": [
                 {
                     "name": "ScriptExtDB",
