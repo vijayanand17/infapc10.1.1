@@ -161,15 +161,16 @@
                             "uri": "https://ispqa1011disks962.blob.core.windows.net/vmcontaineraf98ca85-7494-403a-84e7-98ba4d4bb9fc/osDisk.af98ca85-7494-403a-84e7-test01.vhd"
                         },
                         "caching": "ReadWrite"
-                    },
-                    "networkProfile": {
-                        "networkInterfaces": [
-                            {
-                                "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('dbVMNicName'))]"
-                            }
-                        ]
                     }
                 },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('dbVMNicName'))]"
+                        }
+                    ]
+                }
+            },
             "resources": [
                 {
                     "name": "ScriptExtDB",
