@@ -155,10 +155,10 @@
                         "name": "BaseSQL-U4-osDisk.dd8bad32-f2ff-481c-879d-4650ff7f8247.vhd",
                         "createOption": "FromImage",
                         "image": {
-                            "uri": "https://ispqa1011disks962.blob.core.windows.net/system/Microsoft.Compute/Images/vhd/BaseSQL-U5-osDisk.db0fea59-2f51-4d6f-afe2-bc81545e2b9b.vhd"
+                            "uri": "https://ispqa1011disks962.blob.core.windows.net/system/Microsoft.Compute/Images/vhd/dvm-osDisk.336a842a-4c77-44ff-aa31-f04467f63254.vhd"
                         },
                         "vhd": {
-                            "uri": "https://ispqa1011disks962.blob.core.windows.net/vmcontainer2b545774-3231-4171-9f3e-8c2dcbef15b4/osDisk.2b545774-3231-4171-9f3e-Test01.vhd"
+                            "uri": "https://ispqa1011disks962.blob.core.windows.net/vmcontainer47c19d43-67ae-40b9-b3f3-7e56a5764516/osDisk.47c19d43-67ae-40b9-b3f3-Test05.vhd"
                         },
                         "caching": "ReadWrite"
                     }
@@ -170,7 +170,7 @@
                         }
                     ]
                 }
-            }/*,
+            },
             "resources": [
                 {
                     "name": "ScriptExtDB",
@@ -199,7 +199,7 @@
                         }
                     }
                 }
-            ]*/
+            ]
         }
     ],
     "outputs": {
