@@ -6,7 +6,8 @@
   [string]$dbName
 )
 
-
+#Debug
+echo $osUsername $osPassword $dbUsername $dbPassword $dbName
 
 Enable-PSRemoting -Force
 $credential = New-Object System.Management.Automation.PSCredential @(($env:COMPUTERNAME + "\" + $osUsername), (ConvertTo-SecureString -String $osPassword -AsPlainText -Force))
