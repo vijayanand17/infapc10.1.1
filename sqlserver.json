@@ -184,7 +184,7 @@
                             ]
                         },
                         "protectedSettings": {
-                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -file ', variables('extScriptFile'), ' -osUsername \"', parameters('dbVMAdminUsername'), ' -osPassword \"', parameters('dbVMAdminPassword'), ' -dbUsername \"', parameters('DBUser'), '\" -dbPassword \"', parameters('DBPassword'), '\" -dbName \"', parameters('dbName'), '\"')]"
+                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -file ', variables('extScriptFile'), ' -osUsername \"', parameters('dbVMAdminUsername'), '\" -osPassword \"', parameters('dbVMAdminPassword'), '\" -dbUsername \"', parameters('DBUser'), '\" -dbPassword \"', parameters('DBPassword'), '\" -dbName \"', parameters('dbName'), '\"')]"
                         }
                     }
                 },
@@ -194,7 +194,8 @@
 					"name": "[concat(parameters('dbVMName'), '/SqlIaasExtension')]",
 					"location": "[resourceGroup().location]",
 					"dependsOn": [
-						"[concat('Microsoft.Compute/virtualMachines/', parameters('dbVMName'))]"
+                        "[concat('Microsoft.Compute/virtualMachines/', parameters('dbVMName'))]",
+                        ""
 					],
 					"properties": {
 						"type": "SqlIaaSAgent",
