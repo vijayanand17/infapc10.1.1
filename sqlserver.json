@@ -26,6 +26,9 @@
         "dbPassword": {
             "type": "securestring"
         },
+		"dbName": {
+            "type": "string"
+        },
         "vnetName": {
             "type": "string"
         },
@@ -51,11 +54,11 @@
         "dbOsType": "windows",
 
         "extScriptURI": "[concat(parameters('baseUrl'), '/')]",
-        "extScriptFile": "createsqldbuser.ps1",
+        "extScriptFile": "databaseconfiguration.ps1",
 
-        "imagePublisher": "informatica",
-        "imageOffer": "sqlserver-2014-image",
-        "osVersion": "sqlserver-2014-image-for-pc-bdm"
+        "imagePublisher": "MicrosoftSQLServer",
+        "imageOffer": "SQL2014SP2-WS2012R2",
+        "osVersion": "Enterprise"
     },
     "resources": [
         {
@@ -181,10 +184,36 @@
                             ]
                         },
                         "protectedSettings": {
-                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -file ', variables('extScriptFile'), ' -dbUserName \"', parameters('DBUser'), '\" -dbPassword \"', parameters('DBPassword'), '\"')]"
+                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -file ', variables('extScriptFile'), ' -osUsername \"', parameters('dbVMAdminUsername'), ' -osPassword \"', parameters('dbVMAdminPassword'), ' -dbUsername \"', parameters('DBUser'), '\" -dbPassword \"', parameters('DBPassword'), '\" -dbName \"', parameters('dbName'), '\"')]"
                         }
                     }
-                }
+                },
+				{
+					"apiVersion": "2015-06-15",
+					"type": "Microsoft.Compute/virtualMachines/extensions",
+					"name": "[concat(parameters('dbVMName'), '/SqlIaasExtension')]",
+					"location": "[resourceGroup().location]",
+					"dependsOn": [
+						"[concat('Microsoft.Compute/virtualMachines/', parameters('dbVMName'))]"
+					],
+					"properties": {
+						"type": "SqlIaaSAgent",
+						"publisher": "Microsoft.SqlServer.Management",
+						"typeHandlerVersion": "1.2",
+						"autoUpgradeMinorVersion": true,
+						"settings": {
+							"AutoTelemetrySettings": {
+								"Region": "[resourceGroup().location]"
+							},
+							"KeyVaultCredentialSettings": {
+								"Enable": false,
+								"CredentialName": ""
+							}
+						},
+						"protectedSettings": {
+						}
+					}
+				}
             ]
         }
     ],

@@ -376,9 +376,23 @@
                                 }
                             },
                             {
+                                "name": "dbName",
+                                "type": "Microsoft.Common.TextBox",
+                                "label": "Database name",
+                                "toolTip": {
+                                    "password": "Name for the database"
+                                },
+                                "osPlatform": "Windows",
+                                "constraints": {
+                                    "required": true,
+                                    "regex": "^([a-zA-Z][a-z0-9A-Z]{2,30})$",
+                                    "validationMessage": "Only alphanumeric characters are allowed. The value must be 3-30 characters long"
+                                }
+                            },
+                            {
                                 "name": "databaseVMSize",
                                 "type": "Microsoft.Compute.SizeSelector",
-                                "label": "Database  machine size",
+                                "label": "Database machine size",
                                 "toolTip": "The size of machine for database",
                                 "recommendedSizes": [
                                     "Standard_DS3",
@@ -408,9 +422,9 @@
                                 },
                                 "osPlatform": "Windows",
                                 "imageReference": {
-                                    "publisher": "informatica",
-                                    "offer": "sqlserver-2014-image",
-                                    "sku": "sqlserver-2014-image-for-pc-bdm"
+                                    "publisher": "MicrosoftSQLServer",
+                                    "offer": "SQL2014SP2-WS2012R2",
+                                    "sku": "Enterprise"
                                 },
                                 "count": 1
                             }
