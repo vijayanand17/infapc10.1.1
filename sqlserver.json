@@ -195,7 +195,7 @@
 					"location": "[resourceGroup().location]",
 					"dependsOn": [
                         "[concat('Microsoft.Compute/virtualMachines/', parameters('dbVMName'))]",
-                        ""
+                        "ScriptExtDB"
 					],
 					"properties": {
 						"type": "SqlIaaSAgent",
