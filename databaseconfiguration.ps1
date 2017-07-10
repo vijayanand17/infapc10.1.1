@@ -1,4 +1,5 @@
 ﻿Param(
+  [string]$hostName,
   [string]$osUsername,
   [string]$osPassword,
   [string]$dbUsername,
@@ -9,7 +10,7 @@
 
 
 Enable-PSRemoting -Force
-$credential = New-Object System.Management.Automation.PSCredential @(($env:COMPUTERNAME + "\" + $osUsername), (ConvertTo-SecureString -String $osPassword -AsPlainText -Force))
+$credential = New-Object System.Management.Automation.PSCredential @(($hostName + "\" + $osUsername), (ConvertTo-SecureString -String $osPassword -AsPlainText -Force))
 
 Invoke-Command -Credential $credential -ComputerName $env:COMPUTERNAME -ArgumentList $dbUsername,$dbPassword,$dbName -ScriptBlock {
     Param 
@@ -51,7 +52,6 @@ Invoke-Command -Credential $credential -ComputerName $env:COMPUTERNAME -Argument
         }
     }
 
-    function executeStatement {
         Param([String] $sqlStatement, [string] $dbName)
 
         $errorFlag = 1
@@ -100,11 +100,6 @@ Invoke-Command -Credential $credential -ComputerName $env:COMPUTERNAME -Argument
 	waitTillDatabaseIsAlive master
 	
 	writeLog "Creating database: $dbName"
-    executeStatement $newDatabase master
 	
     writeLog "Creating user: $dbUsername" 
-    executeStatement $newLogin $dbName
-    executeStatement $newUser $dbName
-    executeStatement $updateUserRole $dbName
-    executeStatement $newSchema $dbName
 }
