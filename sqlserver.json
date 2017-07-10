@@ -211,8 +211,6 @@
 							}
 						},
 						"protectedSettings": {
-							"SQLAuthUpdateUserName": "[parameters('dbVMAdminUsername')]",
-							"SQLAuthUpdatePassword": "[parameters('dbVMAdminPassword')]"
 						}
 					}
 				}
