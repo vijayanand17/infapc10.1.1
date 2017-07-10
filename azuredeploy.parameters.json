@@ -55,12 +55,6 @@
         },
         "existingStorageRG": {
             "value": ""
-        },
-        "dbName": {
-            "value": "testdb"
-        },
-        "baseUrl": {
-            "value": "https://raw.githubusercontent.com/vijayanand17/infapc10.1.1/1011HF1"
         }
     }
 }
