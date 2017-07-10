@@ -136,13 +136,6 @@
                 "description": "Database user password for Informatica domain"
             }
         },
-        "dbName": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Database name for Informatica domain"
-            }
-        },
         "nodeVMSize": {
             "type": "string",
             "defaultValue": "Standard_D11",
@@ -425,9 +418,6 @@
                     "dbPassword": {
                         "value": "[parameters('dbPassword')]"
                     },
-                    "dbName": {
-                        "value": "[parameters('dbName')]"
-                    },
                     "vnetName": {
                         "value": "[parameters('vnetName')]"
                     },
@@ -492,9 +482,6 @@
                     },
                     "dbPassword": {
                         "value": "[parameters('dbPassword')]"
-                    },
-                    "dbName": {
-                        "value": "[parameters('dbName')]"
                     },
                     "nodeVMSize": {
                         "value": "[parameters('nodeVMSize')]"
